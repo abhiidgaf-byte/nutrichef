@@ -19,14 +19,14 @@ import { CinematicStory } from './components/CinematicStory';
 
 export default function App() {
   return (
-    <main className="bg-black min-h-screen selection:bg-emerald-500 selection:text-white">
+    <main className="bg-[#FAF8F5] text-stone-900 min-h-screen selection:bg-emerald-500 selection:text-white">
       <Navbar />
       <Hero />
       <TrustBar />
       
       {/* Cinematic Storytelling Experience */}
       <CinematicStory />
-      
+      <Testimonials />
       <Pricing />
       <FAQ />
       <FinalCTA />

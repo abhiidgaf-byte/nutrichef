@@ -29,16 +29,16 @@ export const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
-    <section className="bg-black py-32 px-6">
+    <section className="bg-[#FAF8F5] py-32 px-6">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-24">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-8xl font-bold text-white tracking-tighter leading-[0.85] mb-8"
+            className="text-5xl md:text-8xl font-bold text-stone-900 tracking-tighter leading-[0.85] mb-8"
           >
             Clinical <br />
-            <span className="text-white/20">Questions.</span>
+            <span className="text-stone-400">Questions.</span>
           </motion.h2>
         </div>
 
@@ -46,16 +46,16 @@ export const FAQ = () => {
           {faqs.map((faq, i) => (
             <motion.div
               key={faq.question}
-              className="border-b border-white/5"
+              className="border-b border-stone-200/80"
             >
               <button
                 onClick={() => setActiveIndex(activeIndex === i ? null : i)}
-                className="w-full py-10 flex items-center justify-between text-left group"
+                className="w-full py-8 flex items-center justify-between text-left group"
               >
-                <span className={`text-2xl md:text-3xl font-bold tracking-tight transition-all duration-500 ${activeIndex === i ? 'text-emerald-400' : 'text-white/60 group-hover:text-white'}`}>
+                <span className={`text-2xl md:text-3xl font-bold tracking-tight transition-all duration-500 ${activeIndex === i ? 'text-emerald-700' : 'text-stone-800 group-hover:text-emerald-600'}`}>
                   {faq.question}
                 </span>
-                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-500 ${activeIndex === i ? 'bg-emerald-500 text-white rotate-180' : 'bg-white/5 text-white/20 group-hover:bg-white/10'}`}>
+                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-500 ${activeIndex === i ? 'bg-emerald-600 text-white rotate-180 shadow-md shadow-emerald-600/20' : 'bg-stone-100 text-stone-500 group-hover:bg-stone-200'}`}>
                   {activeIndex === i ? <Minus className="w-6 h-6" /> : <Plus className="w-6 h-6" />}
                 </div>
               </button>
@@ -69,7 +69,7 @@ export const FAQ = () => {
                     transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                     className="overflow-hidden"
                   >
-                    <p className="pb-10 text-xl md:text-2xl text-white/40 font-light leading-relaxed max-w-3xl tracking-tight">
+                    <p className="pb-8 text-xl md:text-2xl text-stone-600 font-light leading-relaxed max-w-3xl tracking-tight">
                       {faq.answer}
                     </p>
                   </motion.div>
