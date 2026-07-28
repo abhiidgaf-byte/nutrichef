@@ -1,24 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ArrowLeft, Sparkles, MapPin, ChevronDown } from 'lucide-react';
+import { FlowStep } from '../types';
+
+interface NavbarProps {
+  currentStep?: FlowStep;
+  onStartFlow?: () => void;
+  onNavigateStep?: (step: FlowStep) => void;
+  onReturnToLanding?: () => void;
+}
 
 const navItems = [
   { label: 'Home', href: '#' },
   { label: 'How It Works', href: '#how-it-works' },
   { label: 'Subscriptions', href: '#subscriptions' },
-  { label: 'Testimonials', href: '#testimonials' },
 ];
 
-export const Navbar = () => {
+export const Navbar: React.FC<NavbarProps> = ({
+  currentStep = 'landing',
+  onStartFlow,
+  onNavigateStep,
+  onReturnToLanding
+}) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('Home');
+  const [demoMenuOpen, setDemoMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
       
-      // Update active section based on scroll position
       const sections = navItems.map(item => item.href.replace('#', '')).filter(Boolean);
       for (const section of sections.reverse()) {
         const el = document.getElementById(section);
@@ -33,101 +45,188 @@ export const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const isFlowActive = currentStep !== 'landing';
+
   return (
     <nav 
-      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-700 ${
-        isScrolled ? 'py-4 bg-white/80 backdrop-blur-2xl border-b border-stone-200/60 shadow-sm' : 'py-8 bg-transparent'
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
+        isScrolled || isFlowActive 
+          ? 'py-3.5 bg-white/90 backdrop-blur-2xl border-b border-stone-200/80 shadow-sm' 
+          : 'py-6 bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+        
+        {/* Brand Logo */}
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="flex items-center gap-2 group cursor-pointer"
+          onClick={onReturnToLanding}
+          className="flex items-center gap-2.5 group cursor-pointer"
         >
-          <div className="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-600/20 group-hover:scale-110 transition-transform duration-500">
-            <span className="text-white font-bold italic text-xl">N</span>
+          <div className="w-9 h-9 bg-emerald-800 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-800/20 group-hover:scale-105 transition-transform duration-300">
+            <span className="text-amber-400 font-bold italic text-lg">N</span>
           </div>
-          <span className="text-2xl font-bold tracking-tight text-stone-900">
-            NutriChef
-          </span>
+          <div>
+            <span className="text-xl font-bold tracking-tight text-stone-900 block leading-none">
+              NutriChef
+            </span>
+            <span className="text-[9px] font-bold tracking-widest text-emerald-800 uppercase block mt-0.5">
+              Bangalore • Home Chef
+            </span>
+          </div>
         </motion.div>
 
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-1 bg-stone-100/80 backdrop-blur-md p-1.5 rounded-full border border-stone-200/80 shadow-inner">
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className={`relative px-5 py-2 text-sm font-semibold transition-all duration-500 rounded-full ${
-                activeSection === item.label 
-                  ? 'text-stone-900' 
-                  : 'text-stone-500 hover:text-stone-900'
-              }`}
-            >
-              {activeSection === item.label && (
-                <motion.div 
-                  layoutId="activeNav"
-                  className="absolute inset-0 bg-white rounded-full z-[-1] shadow-sm border border-stone-200/60"
-                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                />
-              )}
-              {item.label}
-            </a>
-          ))}
-        </div>
+        {/* LANDING PAGE NAV ITEMS */}
+        {!isFlowActive ? (
+          <>
+            <div className="hidden md:flex items-center gap-1 bg-stone-100/80 backdrop-blur-md p-1.5 rounded-full border border-stone-200/80 shadow-inner">
+              {navItems.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className={`relative px-5 py-2 text-xs font-bold transition-all duration-300 rounded-full ${
+                    activeSection === item.label 
+                      ? 'text-stone-900' 
+                      : 'text-stone-500 hover:text-stone-900'
+                  }`}
+                >
+                  {activeSection === item.label && (
+                    <motion.div 
+                      layoutId="activeNav"
+                      className="absolute inset-0 bg-white rounded-full z-[-1] shadow-sm border border-stone-200/60"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  {item.label}
+                </a>
+              ))}
+            </div>
 
-        <div className="hidden md:flex items-center gap-8">
-          <button className="text-sm font-black uppercase tracking-[0.2em] text-stone-500 hover:text-stone-900 transition-all duration-500">
-            Login
-          </button>
-          <motion.button 
-            whileHover={{ scale: 1.02, y: -2 }}
-            whileTap={{ scale: 0.98 }}
-            className="px-8 py-3.5 bg-emerald-600 text-white rounded-full text-sm font-black uppercase tracking-[0.2em] shadow-[0_10px_25px_rgba(16,185,129,0.25)] hover:bg-emerald-500 transition-all duration-500"
-          >
-            Start Journey
-          </motion.button>
-        </div>
+            <div className="hidden md:flex items-center gap-4">
+              <button 
+                onClick={onStartFlow}
+                className="text-xs font-bold uppercase tracking-wider text-stone-600 hover:text-stone-900 px-3 py-2"
+              >
+                Sign In
+              </button>
+              <motion.button 
+                whileHover={{ scale: 1.02, y: -1 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={onStartFlow}
+                className="px-6 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-amber-300 rounded-full text-xs font-black uppercase tracking-wider shadow-md shadow-emerald-800/20 transition-all flex items-center gap-2"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                Start Journey
+              </motion.button>
+            </div>
+          </>
+        ) : (
+          /* ONBOARDING & PROTOTYPE FLOW HEADER */
+          <div className="flex items-center gap-3">
+            
+            {/* Quick Screen Jumper for VC Demo */}
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setDemoMenuOpen(!demoMenuOpen)}
+                className="px-3 py-1.5 rounded-full bg-stone-100 border border-stone-200 text-stone-800 text-xs font-bold flex items-center gap-2 hover:bg-stone-200 transition-all"
+              >
+                <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
+                <span className="hidden sm:inline">Flow Stage:</span>
+                <span className="text-emerald-800 font-extrabold capitalize">
+                  {currentStep.replace('_', ' ')}
+                </span>
+                <ChevronDown className="w-3.5 h-3.5 text-stone-500" />
+              </button>
+
+              {/* Demo Jump Menu */}
+              <AnimatePresence>
+                {demoMenuOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    className="absolute right-0 top-full mt-2 w-56 bg-white border border-stone-200 rounded-2xl shadow-xl p-2 z-50 text-xs font-medium space-y-1"
+                  >
+                    <p className="px-3 py-1.5 text-[10px] font-black uppercase text-stone-400 tracking-wider">
+                      Demo Flow Jumper
+                    </p>
+                    {[
+                      { id: 'intake_form', label: '1. Health Intake Form' },
+                      { id: 'analysis', label: '2. Analysis Transition' },
+                      { id: 'blueprint_result', label: '3. Personalized Blueprint' },
+                      { id: 'subscription_select', label: '4. Subscription Tiers' },
+                      { id: 'cook_schedule', label: '5. Match Cook & Schedule' },
+                      { id: 'celebration', label: '6. Celebration Screen' },
+                      { id: 'dashboard', label: '7. Customer Dashboard' },
+                    ].map(st => (
+                      <button
+                        key={st.id}
+                        type="button"
+                        onClick={() => {
+                          onNavigateStep?.(st.id as FlowStep);
+                          setDemoMenuOpen(false);
+                        }}
+                        className={`w-full text-left px-3 py-2 rounded-xl transition-all ${
+                          currentStep === st.id ? 'bg-emerald-800 text-white font-bold' : 'hover:bg-stone-100 text-stone-700'
+                        }`}
+                      >
+                        {st.label}
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            <button
+              type="button"
+              onClick={onReturnToLanding}
+              className="px-3.5 py-1.5 rounded-full border border-stone-200/80 text-stone-600 hover:text-stone-900 text-xs font-bold transition-all flex items-center gap-1 bg-stone-50"
+            >
+              <ArrowLeft className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Landing Page</span>
+            </button>
+          </div>
+        )}
 
         {/* Mobile Menu Toggle */}
         <button 
           className="md:hidden p-2 text-stone-800"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
-          {mobileMenuOpen ? (
-            <X className="text-stone-900" />
-          ) : (
-            <Menu className="text-stone-900" />
-          )}
+          {mobileMenuOpen ? <X /> : <Menu />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Nav */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 right-0 bg-white border-b border-stone-200 p-6 md:hidden flex flex-col gap-6 shadow-2xl text-stone-900"
+            exit={{ opacity: 0, y: -10 }}
+            className="absolute top-full left-0 right-0 bg-white border-b border-stone-200 p-5 md:hidden flex flex-col gap-4 shadow-xl text-stone-900 text-sm font-bold"
           >
-            {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="text-lg font-medium text-stone-700 hover:text-stone-900"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {item.label}
-              </a>
-            ))}
-            <div className="flex flex-col gap-3 pt-6 border-t border-stone-100">
-              <button className="w-full py-4 text-stone-700 font-medium">Login</button>
-              <button className="w-full py-4 bg-emerald-600 text-white rounded-2xl font-bold shadow-lg shadow-emerald-600/20">
-                Book Free Consultation
-              </button>
-            </div>
+            <button 
+              onClick={() => {
+                onStartFlow?.();
+                setMobileMenuOpen(false);
+              }}
+              className="w-full py-3 bg-emerald-800 text-amber-300 rounded-xl text-center shadow-md font-bold"
+            >
+              Start Intake Flow
+            </button>
+            <button 
+              onClick={() => {
+                onReturnToLanding?.();
+                setMobileMenuOpen(false);
+              }}
+              className="w-full py-3 bg-stone-100 text-stone-800 rounded-xl text-center font-bold"
+            >
+              View Landing Page
+            </button>
           </motion.div>
         )}
       </AnimatePresence>

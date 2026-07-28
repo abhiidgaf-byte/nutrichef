@@ -1,6 +1,6 @@
 {
-  "name": "NutriChef Cinematic Experience",
-  "description": "A premium, scroll-driven cinematic storytelling journey for NutriChef, featuring Apple-inspired animations and immersive transitions.",
+  "name": "NutriChef",
+  "description": "Personalized Nutrition Chef Subscription Platform in Bangalore, India. Home cooks tailored to your health conditions and nutrition goals.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
