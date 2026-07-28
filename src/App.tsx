@@ -15,21 +15,19 @@ import { Testimonials } from './components/Testimonials';
 import { FAQ } from './components/FAQ';
 import { FinalCTA, Footer } from './components/Footer';
 
+import { CinematicStory } from './components/CinematicStory';
+
 export default function App() {
   return (
-    <main className="bg-white min-h-screen selection:bg-emerald-500 selection:text-white">
+    <main className="bg-black min-h-screen selection:bg-emerald-500 selection:text-white">
       <Navbar />
       <Hero />
       <TrustBar />
-      <ProblemSection />
-      <SolutionSection />
       
-      {/* Story Section - Full Screen Scroll Driven */}
-      <StorySection />
+      {/* Cinematic Storytelling Experience */}
+      <CinematicStory />
       
       <Pricing />
-      <ComparisonTable />
-      <Testimonials />
       <FAQ />
       <FinalCTA />
       <Footer />

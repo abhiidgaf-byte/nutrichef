@@ -29,46 +29,47 @@ export const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
-    <section className="bg-white py-32 px-6">
+    <section className="bg-black py-32 px-6">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-24">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-7xl font-bold text-stone-900 tracking-tighter leading-[0.9] mb-8"
+            className="text-5xl md:text-8xl font-bold text-white tracking-tighter leading-[0.85] mb-8"
           >
-            Common <br />
-            <span className="text-stone-300">Questions.</span>
+            Clinical <br />
+            <span className="text-white/20">Questions.</span>
           </motion.h2>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-6">
           {faqs.map((faq, i) => (
             <motion.div
               key={faq.question}
-              className="border-b border-stone-100"
+              className="border-b border-white/5"
             >
               <button
                 onClick={() => setActiveIndex(activeIndex === i ? null : i)}
-                className="w-full py-8 flex items-center justify-between text-left group"
+                className="w-full py-10 flex items-center justify-between text-left group"
               >
-                <span className={`text-2xl font-bold tracking-tight transition-colors ${activeIndex === i ? 'text-emerald-600' : 'text-stone-900 group-hover:text-emerald-600'}`}>
+                <span className={`text-2xl md:text-3xl font-bold tracking-tight transition-all duration-500 ${activeIndex === i ? 'text-emerald-400' : 'text-white/60 group-hover:text-white'}`}>
                   {faq.question}
                 </span>
-                <div className={`p-2 rounded-full transition-all ${activeIndex === i ? 'bg-emerald-500 text-white rotate-180' : 'bg-stone-50 text-stone-400 group-hover:bg-emerald-50'}`}>
-                  {activeIndex === i ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
+                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-500 ${activeIndex === i ? 'bg-emerald-500 text-white rotate-180' : 'bg-white/5 text-white/20 group-hover:bg-white/10'}`}>
+                  {activeIndex === i ? <Minus className="w-6 h-6" /> : <Plus className="w-6 h-6" />}
                 </div>
               </button>
               
               <AnimatePresence>
                 {activeIndex === i && (
                   <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
+                    initial={{ height: 0, opacity: 0, filter: 'blur(10px)' }}
+                    animate={{ height: "auto", opacity: 1, filter: 'blur(0px)' }}
+                    exit={{ height: 0, opacity: 0, filter: 'blur(10px)' }}
+                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                     className="overflow-hidden"
                   >
-                    <p className="pb-8 text-xl text-stone-500 font-medium leading-relaxed max-w-3xl">
+                    <p className="pb-10 text-xl md:text-2xl text-white/40 font-light leading-relaxed max-w-3xl tracking-tight">
                       {faq.answer}
                     </p>
                   </motion.div>

@@ -255,55 +255,43 @@ const Scene5 = ({ progress }: { progress: any }) => {
 
 const Scene6 = ({ progress }: { progress: any }) => {
   const opacity = useTransform(progress, [0.55, 0.6, 0.65], [0, 1, 0]);
-  const boxX = useTransform(progress, [0.55, 0.6, 0.65], [-100, 0, 100]);
+  const scale = useTransform(progress, [0.55, 0.6, 0.65], [0.8, 1, 1.2]);
   
   return (
     <motion.div 
-      style={{ opacity }}
+      style={{ opacity, scale }}
       className="fixed inset-0 flex flex-col items-center justify-center p-6 text-center"
     >
-      <div className="relative w-full max-w-xl h-80 flex items-center justify-center">
+      <div className="relative w-full max-w-2xl h-96 flex items-center justify-center">
         <motion.div 
-          style={{ x: boxX }}
-          className="w-72 h-56 bg-stone-800 rounded-3xl border-t-8 border-emerald-500 shadow-2xl relative overflow-hidden"
+          initial={{ opacity: 0, rotateY: 45 }}
+          whileInView={{ opacity: 1, rotateY: 0 }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          className="relative bg-white/5 backdrop-blur-3xl rounded-[60px] p-12 border border-white/10 shadow-2xl flex flex-col items-center gap-8"
         >
-          <div className="absolute top-4 right-4 w-12 h-12 bg-emerald-500 rounded-lg flex items-center justify-center">
-             <span className="text-white text-xl font-bold italic">N</span>
+          <div className="w-24 h-24 bg-emerald-500/20 rounded-3xl flex items-center justify-center border border-emerald-500/30">
+            <ChefHat className="w-12 h-12 text-emerald-400" />
           </div>
-          <div className="absolute bottom-4 left-4">
-             <p className="text-white/40 text-[10px] uppercase tracking-tighter">Freshly Prepared</p>
-             <p className="text-white text-xs font-semibold uppercase tracking-wider">Premium Nutrition Box</p>
+          <div className="space-y-4">
+            <h3 className="text-4xl font-bold text-white tracking-tight">Chef Service. <span className="text-emerald-400">Zero Friction.</span></h3>
+            <p className="text-white/40 text-xl max-w-md mx-auto leading-relaxed font-light">
+              Every meal is prepared in a controlled environment by your dedicated chef, 
+              ensuring 100% adherence to your clinical or fitness requirements.
+            </p>
           </div>
           
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-center justify-center"
-          >
-             <div className="flex flex-col items-center">
-                <div className="w-12 h-1 bg-white/20 rounded-full mb-2" />
-                <span className="text-white/60 text-xs font-light">Opening Experience...</span>
-             </div>
-          </motion.div>
-        </motion.div>
-        
-        {/* Animated route dot */}
-        <motion.div 
-          className="absolute bottom-0 w-full h-1 bg-white/5 rounded-full"
-          style={{ overflow: 'hidden' }}
-        >
-          <motion.div 
-             animate={{ x: ['-100%', '100%'] }}
-             transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-             className="w-1/4 h-full bg-emerald-500 shadow-[0_0_15px_rgba(16,185,129,1)]"
-          />
+          <div className="flex gap-4">
+             {[1, 2, 3].map(i => (
+               <div key={i} className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" style={{ animationDelay: `${i * 0.2}s` }} />
+             ))}
+          </div>
         </motion.div>
       </div>
       
       <div className="mt-16">
         <h2 className="text-4xl md:text-6xl font-light text-white mb-4 tracking-tight">
-          Delivered fresh, <br />
-          <span className="font-semibold text-emerald-400">right to your door.</span>
+          Elite preparation, <br />
+          <span className="font-semibold text-emerald-400 italic">handled entirely for you.</span>
         </h2>
       </div>
     </motion.div>
@@ -437,7 +425,7 @@ const Scene8 = ({ progress }: { progress: any }) => {
          
          <p className="text-white/60 text-xl md:text-2xl font-light max-w-2xl mx-auto leading-relaxed mb-16">
             From your first meal to your healthiest life, <br />
-            Nutrify adapts every step of the journey.
+            NutriChef adapts every step of the journey.
          </p>
          
          <motion.button 

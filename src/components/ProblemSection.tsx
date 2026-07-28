@@ -31,44 +31,55 @@ const problems = [
 
 export const ProblemSection = () => {
   return (
-    <section className="bg-white py-32 px-6">
+    <section className="bg-white py-40 px-6 overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-24">
-          <motion.p 
+        <div className="text-center mb-32">
+          <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-emerald-600 font-bold uppercase tracking-[0.3em] text-sm mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-stone-100 text-stone-500 text-[10px] font-black uppercase tracking-[0.3em] mb-8"
           >
-            The Obstacles
-          </motion.p>
+            The Adherence Gap
+          </motion.div>
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-5xl md:text-7xl font-bold text-stone-900 tracking-tighter leading-[0.9]"
+            className="text-6xl md:text-8xl font-bold text-stone-900 tracking-tighter leading-[0.85] mb-10"
           >
-            Why Healthy Eating <br />
-            <span className="text-stone-300">Fails for Most.</span>
+            Why Your Health <br />
+            <span className="text-stone-300">Strategy Fails.</span>
           </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="text-stone-400 text-xl font-medium max-w-2xl mx-auto"
+          >
+            Willpower isn't the problem. The ecosystem of food around you is designed for convenience, not longevity.
+          </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {problems.map((problem, i) => (
             <motion.div
               key={problem.title}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1, duration: 0.8 }}
+              transition={{ delay: i * 0.1, duration: 1, ease: [0.22, 1, 0.36, 1] }}
               viewport={{ once: true }}
-              className="group p-8 bg-stone-50 rounded-[40px] border border-stone-100 hover:bg-white hover:shadow-2xl hover:shadow-stone-200 transition-all duration-500"
+              className="group p-10 bg-white rounded-[48px] border border-stone-100 shadow-[0_10px_30px_rgba(0,0,0,0.02)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.06)] hover:-translate-y-2 transition-all duration-700 relative overflow-hidden"
             >
-              <div className={`w-16 h-16 ${problem.color} rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-500`}>
-                <problem.icon className="w-8 h-8" />
+              <div className={`w-20 h-20 ${problem.color} rounded-3xl flex items-center justify-center mb-10 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-700 shadow-sm`}>
+                <problem.icon className="w-10 h-10 stroke-[1.5px]" />
               </div>
-              <h3 className="text-2xl font-bold text-stone-900 mb-4 tracking-tight">{problem.title}</h3>
-              <p className="text-stone-500 leading-relaxed font-medium">
+              <h3 className="text-3xl font-bold text-stone-900 mb-6 tracking-tight leading-tight">{problem.title}</h3>
+              <p className="text-stone-400 text-lg leading-relaxed font-medium transition-colors group-hover:text-stone-600">
                 {problem.description}
               </p>
+              <div className="absolute top-0 right-0 p-8 opacity-0 group-hover:opacity-5 transition-opacity duration-700">
+                <problem.icon className="w-32 h-32" />
+              </div>
             </motion.div>
           ))}
         </div>
