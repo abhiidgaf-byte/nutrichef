@@ -113,119 +113,82 @@ export const Hero = () => {
           transition={{ duration: 2, ease: [0.16, 1, 0.3, 1] }}
           className="relative lg:h-[800px] flex items-center justify-center"
         >
-          {/* Main Dashboard Shell - Slower, more elegant float */}
+          {/* Main Dashboard Shell - The Vitality Matrix */}
           <motion.div 
-            animate={{ y: [0, -12, 0] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            className="relative w-full max-w-[600px] aspect-[4/5] bg-white/[0.02] backdrop-blur-3xl rounded-[80px] border border-white/10 p-14 shadow-[0_60px_120px_-30px_rgba(0,0,0,0.6)] overflow-hidden group"
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+            className="relative w-full max-w-[580px] aspect-[4/5] bg-white/[0.02] backdrop-blur-3xl rounded-[80px] border border-white/10 p-14 shadow-[0_60px_150px_-30px_rgba(0,0,0,0.8)] overflow-hidden group"
           >
-            <div className="flex justify-between items-center mb-20">
+            {/* Header Section */}
+            <div className="flex justify-between items-center mb-16">
               <div>
-                <p className="text-white/20 text-[10px] uppercase tracking-[0.5em] mb-4 font-black">Clinical Adherence</p>
+                <p className="text-white/20 text-[10px] uppercase tracking-[0.5em] mb-4 font-black">Vitality Matrix</p>
                 <div className="flex items-center gap-5">
                   <motion.h3 className="text-6xl font-bold text-white tracking-tighter">
                     {adherence}%
                   </motion.h3>
                   <div className="px-3 py-1.5 bg-emerald-500/10 text-emerald-400 text-[10px] font-black rounded-lg border border-emerald-500/20 uppercase tracking-widest">
-                    Optimized
+                    Clinical
                   </div>
                 </div>
               </div>
               <motion.div 
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 4, repeat: Infinity }}
-                className="w-16 h-16 bg-emerald-500 rounded-[32px] flex items-center justify-center shadow-[0_0_50px_rgba(16,185,129,0.3)] border border-emerald-400"
+                className="w-16 h-16 bg-white/5 rounded-3xl flex items-center justify-center border border-white/10"
               >
-                <Activity className="w-8 h-8 text-white" />
+                <Activity className="w-8 h-8 text-emerald-400" />
               </motion.div>
             </div>
 
-            <div className="grid grid-cols-2 gap-10 mb-16">
-              <div className="p-8 bg-white/5 rounded-[48px] border border-white/10 hover:bg-white/[0.08] transition-all duration-700 group/item">
-                <div className="flex justify-between items-start mb-8">
-                   <p className="text-white/20 text-[10px] font-black uppercase tracking-[0.4em]">Protein</p>
-                   <PieChart className="w-5 h-5 text-emerald-400/50" />
+            {/* Central Progress - Single Unified Metric */}
+            <div className="mb-16">
+              <div className="flex justify-between items-end mb-8">
+                <div>
+                  <p className="text-white/20 text-[10px] font-black uppercase tracking-[0.4em] mb-2">Weekly Longevity Score</p>
+                  <p className="text-white text-5xl font-black tracking-tighter">
+                    {score}<span className="text-white/20 text-2xl font-medium ml-1">/10.0</span>
+                  </p>
                 </div>
-                <p className="text-white text-4xl font-bold tracking-tight mb-6">142<span className="text-white/20 text-xl font-medium">/160g</span></p>
-                <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
-                  <motion.div 
-                    initial={{ width: 0 }}
-                    animate={{ width: '88%' }}
-                    transition={{ duration: 2.5, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
-                    className="h-full bg-emerald-500"
-                  />
+                <div className="text-right">
+                  <p className="text-emerald-400 text-[10px] font-black uppercase tracking-widest">Peak Optimization</p>
                 </div>
               </div>
-              <div className="p-8 bg-white/5 rounded-[48px] border border-white/10 hover:bg-white/[0.08] transition-all duration-700">
-                <div className="flex justify-between items-start mb-8">
-                   <p className="text-white/20 text-[10px] font-black uppercase tracking-[0.4em]">Calories</p>
-                   <Activity className="w-5 h-5 text-white/20" />
-                </div>
-                <p className="text-white text-4xl font-bold tracking-tight mb-6">1.8k<span className="text-white/20 text-xl font-medium">/2.1k</span></p>
-                <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
-                  <motion.div 
-                    initial={{ width: 0 }}
-                    animate={{ width: '75%' }}
-                    transition={{ duration: 2.5, delay: 1.7, ease: [0.16, 1, 0.3, 1] }}
-                    className="h-full bg-white/30"
-                  />
-                </div>
+              <div className="h-2 bg-white/5 rounded-full overflow-hidden">
+                <motion.div 
+                  initial={{ width: 0 }}
+                  animate={{ width: '84%' }}
+                  transition={{ duration: 3, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
+                  className="h-full bg-gradient-to-r from-emerald-500 to-teal-400 shadow-[0_0_30px_rgba(16,185,129,0.3)]"
+                />
               </div>
             </div>
 
-            <div className="space-y-6">
-              <motion.div 
-                initial={{ x: 30, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: 1.4 }}
-                className="p-6 bg-emerald-500/5 border border-emerald-500/10 rounded-[32px] flex items-center gap-6 group/chef cursor-pointer hover:bg-emerald-500/10 transition-all duration-500"
-              >
-                <div className="w-16 h-16 bg-white rounded-2xl overflow-hidden flex items-center justify-center shadow-2xl group-hover/chef:scale-110 transition-transform duration-700">
-                  <User className="text-stone-400 w-9 h-9" />
-                </div>
-                <div>
-                  <p className="text-emerald-400 text-[10px] font-black uppercase tracking-[0.3em] mb-1">Nutritionist</p>
-                  <p className="text-white font-bold text-xl tracking-tight">Sarah Jenkins, RD</p>
-                </div>
-              </motion.div>
-              
-              <motion.div 
-                initial={{ x: 30, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: 1.6 }}
-                className="p-6 bg-white/5 border border-white/10 rounded-[32px] flex items-center gap-6 group/chef cursor-pointer hover:bg-white/[0.08] transition-all duration-500"
-              >
-                <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center border border-white/10 group-hover/chef:scale-110 transition-transform duration-700">
-                  <ChefHat className="text-white/60 w-9 h-9" />
-                </div>
-                <div>
-                  <p className="text-white/20 text-[10px] font-black uppercase tracking-[0.3em] mb-1">Personal Chef</p>
-                  <p className="text-white font-bold text-xl tracking-tight">Chef Marco Polo</p>
-                </div>
-              </motion.div>
+            {/* Status Grid */}
+            <div className="grid grid-cols-2 gap-8 mb-16">
+              <div className="p-8 bg-white/5 rounded-[40px] border border-white/10">
+                <p className="text-white/20 text-[10px] font-black uppercase tracking-[0.4em] mb-4">Ecosystem</p>
+                <p className="text-white text-2xl font-bold tracking-tight">Active</p>
+                <p className="text-emerald-400 text-[10px] font-black uppercase mt-1">Live Feed</p>
+              </div>
+              <div className="p-8 bg-white/5 rounded-[40px] border border-white/10">
+                <p className="text-white/20 text-[10px] font-black uppercase tracking-[0.4em] mb-4">Chef Status</p>
+                <p className="text-white text-2xl font-bold tracking-tight">Assigned</p>
+                <p className="text-white/20 text-[10px] font-black uppercase mt-1">Marco P.</p>
+              </div>
             </div>
 
-            {/* Premium Progress Visual */}
-            <div className="mt-12 p-12 bg-gradient-to-br from-emerald-600 via-emerald-500 to-teal-500 rounded-[48px] relative overflow-hidden group/score">
-               <div className="relative z-10">
-                 <div className="flex items-center gap-4 mb-6">
-                   <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-md border border-white/10">
-                     <PieChart className="w-5 h-5 text-white" />
-                   </div>
-                   <p className="text-white/60 text-[10px] font-black uppercase tracking-[0.4em]">NutriScore</p>
-                 </div>
-                 <div className="flex items-baseline gap-3">
-                   <p className="text-white text-8xl font-black tracking-tighter leading-none">{score}</p>
-                   <p className="text-4xl text-white/40 font-black">/10</p>
-                 </div>
-               </div>
-               <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
-               <motion.div 
-                 animate={{ rotate: 360 }}
-                 transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                 className="absolute -right-20 -bottom-20 w-96 h-96 border-[30px] border-white/5 rounded-full" 
-               />
+            {/* Bottom Insight */}
+            <div className="p-8 bg-emerald-500/5 border border-emerald-500/10 rounded-[40px] flex items-center gap-6">
+              <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center border border-white/10">
+                <CheckCircle2 className="w-6 h-6 text-emerald-400" />
+              </div>
+              <div>
+                <p className="text-white/20 text-[10px] font-black uppercase tracking-[0.3em] mb-1">Morning Insight</p>
+                <p className="text-white text-sm font-medium tracking-tight">Protein adherence is optimal for recovery.</p>
+              </div>
             </div>
+            
+            {/* Soft Ambient Glow */}
+            <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-emerald-500/5 rounded-full blur-[100px] pointer-events-none" />
           </motion.div>
 
           {/* Luxury Floating Badge */}
