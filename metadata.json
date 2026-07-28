@@ -1,0 +1,6 @@
+{
+  "name": "Nutrify Cinematic Experience",
+  "description": "A premium, scroll-driven cinematic storytelling journey for Nutrify, featuring Apple-inspired animations and immersive transitions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
