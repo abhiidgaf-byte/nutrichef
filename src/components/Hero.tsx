@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, ShieldCheck, MapPin } from 'lucide-react';
+import { ArrowRight, ShieldCheck, MapPin, CheckCircle2, Sparkles, Heart, Flame, Dumbbell, ChefHat, Salad, Stethoscope, Award } from 'lucide-react';
+import heroBannerImg from '../assets/images/nutrichef_chef_rd_collaboration_1785251115984.jpg';
 
 interface HeroProps {
   onStartFlow?: () => void;
@@ -13,57 +14,60 @@ export const Hero: React.FC<HeroProps> = ({ onStartFlow }) => {
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
-        delayChildren: 0.2,
+        delayChildren: 0.15,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 25 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
+        duration: 0.7,
         ease: [0.22, 1, 0.36, 1],
       },
     },
   };
 
   return (
-    <section className="relative min-h-screen pt-32 pb-20 flex items-center bg-[#FAF8F5] overflow-hidden">
+    <section className="relative min-h-screen pt-28 pb-20 flex items-center bg-[#FAF8F5] overflow-hidden">
       {/* Background Ambience */}
       <motion.div 
         animate={{ 
           scale: [1, 1.08, 1],
-          opacity: [0.3, 0.5, 0.3]
+          opacity: [0.25, 0.45, 0.25]
         }}
         transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
         className="absolute top-0 right-0 w-[1000px] h-[1000px] bg-emerald-200/30 rounded-full blur-[160px] -translate-y-1/2 translate-x-1/4 pointer-events-none" 
       />
       <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-amber-100/40 rounded-full blur-[140px] translate-y-1/2 -translate-x-1/4 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center relative z-10">
+        
+        {/* Left Column: Headlines & Call-To-Action */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
+          className="lg:col-span-6 space-y-6"
         >
           <motion.div 
             variants={itemVariants}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-900 text-xs font-bold uppercase tracking-wider mb-6 shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-900 text-xs font-bold uppercase tracking-wider shadow-sm"
           >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-600"></span>
             </span>
             <MapPin className="w-3.5 h-3.5 text-emerald-700" />
-            Bangalore's First Personalized Nutrition Chef Service
+            Bangalore's Premier Personal Nutrition Chef Service
           </motion.div>
 
           <motion.h1 
             variants={itemVariants}
-            className="text-5xl sm:text-7xl lg:text-8xl font-black text-stone-900 mb-8 tracking-tighter leading-[0.9]"
+            className="text-4xl sm:text-6xl lg:text-7xl font-black text-stone-900 tracking-tighter leading-[0.92]"
           >
             Cooked For You, <br />
             <span className="text-stone-500 font-bold">
@@ -73,20 +77,20 @@ export const Hero: React.FC<HeroProps> = ({ onStartFlow }) => {
 
           <motion.p 
             variants={itemVariants}
-            className="text-stone-600 text-lg sm:text-2xl font-normal leading-relaxed mb-10 max-w-[580px] tracking-tight"
+            className="text-stone-600 text-base sm:text-xl font-normal leading-relaxed max-w-[560px] tracking-tight"
           >
-            Trained nutrition chefs visit your home weekly to cook personalized, clinical-grade meals tailored to your diabetes, PCOS, thyroid, or fitness goals.
+            Your nutrition chef visits home every week to cook fresh, clinical-grade meals personalized for your diabetes, PCOS, thyroid, or fitness targets.
           </motion.p>
 
           <motion.div 
             variants={itemVariants}
-            className="flex flex-col sm:flex-row items-center gap-4"
+            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2"
           >
             <motion.button 
               whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
               onClick={onStartFlow}
-              className="w-full sm:w-auto px-10 py-5 bg-amber-500 hover:bg-amber-400 text-stone-950 rounded-full font-black text-lg flex items-center justify-center gap-3 shadow-xl shadow-amber-500/20 transition-all duration-300"
+              className="px-8 py-4 bg-amber-500 hover:bg-amber-400 text-stone-950 rounded-full font-black text-base flex items-center justify-center gap-3 shadow-xl shadow-amber-500/20 transition-all duration-300"
             >
               Let's Personalize It
               <ArrowRight className="w-5 h-5" />
@@ -95,7 +99,7 @@ export const Hero: React.FC<HeroProps> = ({ onStartFlow }) => {
               whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
               onClick={onStartFlow}
-              className="w-full sm:w-auto px-8 py-5 bg-white text-stone-800 border border-stone-200 rounded-full font-bold text-base hover:bg-stone-100 transition-all shadow-sm"
+              className="px-8 py-4 bg-white text-stone-800 border border-stone-200/90 rounded-full font-bold text-sm hover:bg-stone-100 transition-all shadow-sm text-center"
             >
               Explore Weekly Tiers
             </motion.button>
@@ -103,7 +107,7 @@ export const Hero: React.FC<HeroProps> = ({ onStartFlow }) => {
 
           <motion.div 
             variants={itemVariants}
-            className="mt-10 flex items-center gap-6 text-xs text-stone-500 font-medium"
+            className="pt-4 flex flex-wrap items-center gap-4 text-xs text-stone-500 font-medium border-t border-stone-200/60"
           >
             <span className="flex items-center gap-1.5 text-emerald-800 font-bold">
               <ShieldCheck className="w-4 h-4 text-emerald-700" />
@@ -114,48 +118,97 @@ export const Hero: React.FC<HeroProps> = ({ onStartFlow }) => {
           </motion.div>
         </motion.div>
 
-        {/* Hero Graphic / Preview Card */}
+        {/* Right Column: Split Screen Transformation Hero Visual */}
         <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="relative"
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          className="lg:col-span-6 relative"
         >
-          <div className="relative rounded-[40px] overflow-hidden border border-stone-200 bg-white p-6 shadow-2xl">
-            <div className="relative rounded-3xl overflow-hidden aspect-[4/3] mb-6">
+          <div className="relative rounded-[36px] overflow-hidden border border-stone-200 bg-stone-900 shadow-2xl group">
+            
+            {/* Ultra-realistic Split Screen Banner */}
+            <div className="relative aspect-[16/10] sm:aspect-[16/9] overflow-hidden">
               <img 
-                src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&q=80&w=1200" 
-                alt="Personalized Nutrition Chef Cooking"
-                className="w-full h-full object-cover"
+                src={heroBannerImg} 
+                alt="From Unhealthy Food Delivery to Fresh NutriChef Home Visits"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-stone-900/80 via-transparent to-transparent flex items-end p-6">
-                <div>
-                  <span className="px-3 py-1 bg-amber-500 text-stone-950 font-black text-[10px] uppercase tracking-widest rounded-full">
-                    Koramangala Household Visit
-                  </span>
-                  <p className="text-white font-bold text-xl mt-2">Chef Arjun preparing Foxtail Millet Khichdi</p>
-                  <p className="text-stone-300 text-xs font-medium">Tailored for Diabetes Type 2 & Low GI Protocol</p>
+
+
+
+              {/* Floating Apple-style Glassmorphism UI Badges */}
+              <motion.div 
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="absolute top-4 left-4 bg-emerald-900/90 backdrop-blur-xl border border-emerald-400/50 p-2.5 rounded-2xl shadow-xl flex items-center gap-2 text-xs font-bold text-emerald-100"
+              >
+                <div className="w-6 h-6 rounded-xl bg-emerald-500/30 flex items-center justify-center text-emerald-300">
+                  <Award className="w-3.5 h-3.5" />
                 </div>
+                <span>✓ Approved by Nutrition Experts</span>
+              </motion.div>
+
+              <motion.div 
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.5 }}
+                className="absolute top-4 right-4 bg-white/90 backdrop-blur-xl border border-white/90 p-2.5 rounded-2xl shadow-xl flex items-center gap-2 text-xs font-bold text-stone-900"
+              >
+                <div className="w-6 h-6 rounded-xl bg-blue-100 flex items-center justify-center text-blue-700">
+                  <Stethoscope className="w-3.5 h-3.5" />
+                </div>
+                <span>Live Dietitian Consultation</span>
+              </motion.div>
+
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="absolute bottom-4 right-4 bg-stone-900/90 backdrop-blur-xl border border-amber-500/40 p-2.5 rounded-2xl shadow-2xl flex items-center gap-2 text-xs font-bold text-white"
+              >
+                <div className="w-6 h-6 rounded-xl bg-amber-500/20 flex items-center justify-center text-amber-400">
+                  <ChefHat className="w-3.5 h-3.5" />
+                </div>
+                <span>Trained In-Home Chef</span>
+              </motion.div>
+
+              <motion.div 
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.7 }}
+                className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-xl border border-white/90 p-2.5 rounded-2xl shadow-xl flex items-center gap-2 text-xs font-bold text-stone-900"
+              >
+                <div className="w-6 h-6 rounded-xl bg-rose-100 flex items-center justify-center text-rose-600">
+                  <Heart className="w-3.5 h-3.5" />
+                </div>
+                <span>Clinical GI Protocol</span>
+              </motion.div>
+            </div>
+
+            {/* Bottom Quick Feature Strip */}
+            <div className="p-4 bg-stone-900 text-stone-300 grid grid-cols-2 sm:grid-cols-3 gap-2 text-center text-[11px] font-bold border-t border-stone-800">
+              <div className="flex items-center justify-center gap-1.5 p-1.5 rounded-xl bg-stone-800/80">
+                <Stethoscope className="w-3.5 h-3.5 text-blue-400" />
+                <span>Doctor Validated Plan</span>
+              </div>
+              <div className="flex items-center justify-center gap-1.5 p-1.5 rounded-xl bg-stone-800/80">
+                <ChefHat className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Cooked Fresh At Home</span>
+              </div>
+              <div className="col-span-2 sm:col-span-1 flex items-center justify-center gap-1.5 p-1.5 rounded-xl bg-emerald-950/80 text-emerald-400 border border-emerald-800/50">
+                <CheckCircle2 className="w-3.5 h-3.5" />
+                <span>100% Personal Care</span>
               </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-3 text-center text-xs">
-              <div className="p-3 bg-stone-50 rounded-2xl border border-stone-200/80">
-                <span className="text-[10px] font-bold text-stone-400 uppercase block">Glycemic GI</span>
-                <span className="text-emerald-800 font-black text-base">Low GI (38)</span>
-              </div>
-              <div className="p-3 bg-stone-50 rounded-2xl border border-stone-200/80">
-                <span className="text-[10px] font-bold text-stone-400 uppercase block">Daily Protein</span>
-                <span className="text-amber-800 font-black text-base">145g Target</span>
-              </div>
-              <div className="p-3 bg-stone-50 rounded-2xl border border-stone-200/80">
-                <span className="text-[10px] font-bold text-stone-400 uppercase block">Oil Protocol</span>
-                <span className="text-stone-900 font-black text-base">Cold Pressed</span>
-              </div>
-            </div>
           </div>
         </motion.div>
+
       </div>
     </section>
   );
 };
+
