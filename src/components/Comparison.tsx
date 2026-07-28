@@ -32,8 +32,8 @@ export const ComparisonTable = () => {
             Not a Delivery App. <br />
             <span className="text-stone-300 italic">A Health Partner.</span>
           </motion.h2>
-          <p className="text-stone-400 text-2xl font-light max-w-2xl mx-auto">
-            Traditional apps deliver food. <span className="text-emerald-600 font-bold">NutriChef delivers outcomes.</span>
+          <p className="text-stone-500 text-2xl font-light max-w-2xl mx-auto">
+            Food delivery apps send cold takeaway boxes. <span className="text-emerald-800 font-bold">NutriChef sends a trained chef to cook fresh in your home.</span>
           </p>
         </div>
 

@@ -159,18 +159,18 @@ export const CinematicStory = () => {
             </p>
           </div>
 
-          {/* Scene 4: Daily Delivery */}
+          {/* Scene 4: In-Home Cooking */}
           <div className="delivery-content absolute inset-0 flex flex-col justify-center opacity-0 pointer-events-none">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-800 text-[10px] font-black uppercase tracking-[0.4em] mb-6 w-fit shadow-sm">
-              <Gift className="w-3.5 h-3.5 text-emerald-600" />
-              Step 03 — Seamless Delivery
+              <ChefHat className="w-3.5 h-3.5 text-emerald-600" />
+              Step 03 — In-Home Cooking
             </div>
             <h2 className="text-5xl md:text-7xl font-black text-stone-900 tracking-tighter mb-6 leading-tight">
               Culinary Luxury. <br />
-              <span className="text-emerald-700">Arriving Daily.</span>
+              <span className="text-emerald-700">In Your Kitchen.</span>
             </h2>
             <p className="text-stone-600 text-xl font-light leading-relaxed max-w-lg">
-              Fresh, organic, temperature-controlled meals delivered straight to your doorstep every morning.
+              Your trained Nutrition Chef arrives at your home with prepped organic ingredients, cooking fresh customized meals right on your stove.
             </p>
           </div>
 
@@ -240,8 +240,8 @@ export const CinematicStory = () => {
             {/* Delivery Alert Panel */}
             <div className="p-6 bg-emerald-50/80 rounded-[32px] border border-emerald-200/80 opacity-0 dashboard-delivery translate-y-6 mb-8 flex items-center justify-between">
               <div>
-                <p className="text-emerald-800 text-[10px] font-black uppercase tracking-[0.4em] mb-1">Logistics</p>
-                <p className="text-stone-900 text-xl font-bold tracking-tight">Daily Pack Delivered</p>
+                <p className="text-emerald-800 text-[10px] font-black uppercase tracking-[0.4em] mb-1">Kitchen Visit</p>
+                <p className="text-stone-900 text-xl font-bold tracking-tight">In-Home Chef Visit Completed</p>
               </div>
               <CheckCircle2 className="w-8 h-8 text-emerald-600" />
             </div>
