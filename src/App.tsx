@@ -100,10 +100,15 @@ export default function App() {
             <IntakeForm
               userProfile={userProfile}
               setUserProfile={setUserProfile}
+              onNext={() => {
+                setCurrentStep('analysis');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
               onComplete={() => {
                 setCurrentStep('analysis');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
+              onCancel={handleReturnToLanding}
             />
           </motion.div>
         )}

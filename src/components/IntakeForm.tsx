@@ -26,17 +26,27 @@ import { BANGALORE_NEIGHBORHOODS, HEALTH_CONDITIONS, GOALS } from '../data/mockD
 interface IntakeFormProps {
   userProfile: UserProfile;
   setUserProfile: React.Dispatch<React.SetStateAction<UserProfile>>;
-  onNext: () => void;
-  onCancel: () => void;
+  onNext?: () => void;
+  onComplete?: () => void;
+  onCancel?: () => void;
 }
 
 export const IntakeForm: React.FC<IntakeFormProps> = ({
   userProfile,
   setUserProfile,
   onNext,
+  onComplete,
   onCancel,
 }) => {
   const [step, setStep] = useState<number>(1);
+
+  const handleFinish = () => {
+    if (onNext) {
+      onNext();
+    } else if (onComplete) {
+      onComplete();
+    }
+  };
 
   const totalSteps = 4;
 
@@ -496,7 +506,7 @@ export const IntakeForm: React.FC<IntakeFormProps> = ({
                   </button>
                   <button
                     type="button"
-                    onClick={onNext}
+                    onClick={handleFinish}
                     className="px-8 py-4 bg-amber-600 hover:bg-amber-700 text-white rounded-2xl font-black text-sm shadow-xl shadow-amber-600/30 transition-all flex items-center gap-2 transform hover:-translate-y-0.5"
                   >
                     <Sparkles className="w-4 h-4 text-amber-200" />
