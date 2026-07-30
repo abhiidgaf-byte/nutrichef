@@ -256,7 +256,7 @@ export const BlueprintResult: React.FC<BlueprintResultProps> = ({
               Sample Weekly Home-Cooked Schedule
             </h3>
             <span className="text-xs font-bold text-amber-700 bg-amber-100 px-3 py-1 rounded-full border border-amber-200">
-              3 Fresh Chef Visits / Week
+              2 Cook Visits / Day (7 Days / Week)
             </span>
           </div>
 

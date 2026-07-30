@@ -200,7 +200,7 @@ export const Hero: React.FC<HeroProps> = ({ onStartFlow }) => {
               </div>
               <div className="col-span-2 sm:col-span-1 flex items-center justify-center gap-1.5 p-1.5 rounded-xl bg-emerald-950/80 text-emerald-400 border border-emerald-800/50">
                 <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>100% Personal Care</span>
+                <span>Personalized Care</span>
               </div>
             </div>
 

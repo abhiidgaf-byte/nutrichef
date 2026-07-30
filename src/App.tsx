@@ -40,10 +40,13 @@ const INITIAL_SCHEDULE: VisitSchedule = {
 export default function App() {
   const [currentStep, setCurrentStep] = useState<FlowStep>('landing');
   const [userProfile, setUserProfile] = useState<UserProfile>(INITIAL_PROFILE);
-  const [selectedPlanId, setSelectedPlanId] = useState<string>('health_condition');
+  const [selectedPlanId, setSelectedPlanId] = useState<string>('');
   const [schedule, setSchedule] = useState<VisitSchedule>(INITIAL_SCHEDULE);
 
-  const handleStartFlow = () => {
+  const handleStartFlow = (planId?: string) => {
+    if (planId) {
+      setSelectedPlanId(planId);
+    }
     setCurrentStep('intake_form');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };

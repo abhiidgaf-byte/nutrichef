@@ -159,7 +159,7 @@ export const CookSchedule: React.FC<CookScheduleProps> = ({
           {/* Select Visit Days */}
           <div>
             <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-3">
-              Select Visit Days (3 Days / Week)
+              Select Visit Days
             </label>
             <div className="grid grid-cols-2 sm:grid-cols-7 gap-2">
               {AVAILABLE_DAYS.map((day) => {

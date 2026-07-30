@@ -6,6 +6,24 @@
     font-feature-settings: "ss01", "ss02", "cv01", "cv02";
   }
 
+  /* Interactive active pseudo-class state transitions */
+  button,
+  a,
+  [role="button"],
+  input[type="button"],
+  input[type="submit"] {
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  }
+
+  button:active,
+  a:active,
+  [role="button"]:active,
+  input[type="button"]:active,
+  input[type="submit"]:active {
+    background-color: #059669; /* emerald-600 */
+    border-color: #059669;
+  }
+
   /* Custom scrollbar for premium feel */
   ::-webkit-scrollbar {
     width: 6px;

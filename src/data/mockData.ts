@@ -88,59 +88,39 @@ export const GOALS: GoalOption[] = [
 export const SUBSCRIPTION_PLANS: SubscriptionPlan[] = [
   {
     id: 'starter',
-    name: 'Starter Plan',
-    price: 4500,
-    priceDisplay: '₹4,500',
-    visitsPerWeek: 2,
-    mealsPerVisit: '4 meals (2 Lunch + 2 Dinner)',
-    description: 'Ideal for busy working professionals who want home-cooked healthy meals for part of the week.',
+    name: 'Fitness Care Plan',
+    price: 9999,
+    priceDisplay: '₹9,999',
+    visitsPerWeek: 12,
+    mealsPerVisit: '2 Cook Visits / Day (6 Days / Week)',
+    description: 'Designed for fitness enthusiasts & active individuals needing daily fresh customized meals.',
     features: [
-      '2 Cook Visits / Week',
-      '8 Fresh Customized Meals Total',
-      'Basic Macro Allocation',
-      'Ingredient Prep & Kitchen Clean-up',
-      'Monthly RD Chat Review'
+      '2 Cook Visits / Day (6 Days / Week)',
+      'Fresh Home-Cooked Meals Daily',
+      '2 Monthly Health Check-ins with RD',
+      'Dedicated Clinical Nutritionist (RD)',
+      'Same Certified Chef Every Visit'
     ],
-    recommendedFor: 'Solopreneurs & Part-time Meal Prep'
+    recommendedFor: 'Fitness Enthusiasts & Active Lifestyle'
   },
   {
     id: 'health_condition',
-    name: 'Health-Condition Plan',
-    price: 6500,
-    priceDisplay: '₹6,500',
-    visitsPerWeek: 3,
-    mealsPerVisit: '4 meals per visit (12 Meals / Week)',
+    name: 'Health Condition Care',
+    price: 15999,
+    priceDisplay: '₹15,999',
+    visitsPerWeek: 14,
+    mealsPerVisit: '2 Cook Visits / Day (7 Days / Week)',
     popular: true,
-    description: 'Our signature clinical subscription designed specifically for Diabetes, PCOS, Thyroid & BP management.',
+    description: 'Our signature clinical subscription: 2 fresh cook visits per day for 7 days a week with 4 monthly health check-ins.',
     features: [
-      '3 Cook Visits / Week (Mon • Wed • Fri)',
-      '12 Fresh Customized Meals / Week',
+      '2 Cook Visits / Day (7 Days / Week)',
+      'Fresh Home-Cooked Meals Daily',
+      '4 Monthly Health Check-ins with Registered Dietitian',
       'Dedicated Clinical Nutritionist (RD)',
-      'Custom Therapeutic Spice Mixes Included',
       'Same Certified Chef Every Visit',
-      '100% Kitchen Hygiene & Sanitize Guarantee',
-      'Bi-weekly Blood Sugar & Biomarker Review'
+      'Bi-weekly Biomarker & Progress Review'
     ],
-    recommendedFor: 'Diabetes, PCOS, Thyroid & Weight Management'
-  },
-  {
-    id: 'full_day',
-    name: 'Full Day Care Plan',
-    price: 11000,
-    priceDisplay: '₹11,000',
-    visitsPerWeek: 5,
-    mealsPerVisit: 'Full Day Meals (Breakfast + Lunch + Dinner)',
-    description: 'Complete hands-off nutrition engineering. Fresh daily culinary visits covering all your daily meals.',
-    features: [
-      '5 Cook Visits / Week',
-      '20+ Fresh Gourmet Meals / Week',
-      'Breakfast + Lunch + Dinner Prep',
-      'Unlimited Nutritionist Consultations',
-      'Personalized Pantry Sourcing Guide',
-      'Custom Snacks & Fresh Herbal Infusions',
-      'Family Add-on Discounts Available'
-    ],
-    recommendedFor: 'Complete Hands-Off Longevity Experience'
+    recommendedFor: 'Diabetes, PCOS, Thyroid & Complete Daily Care'
   }
 ];
 
