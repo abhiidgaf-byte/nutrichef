@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh auth *)",
+      "Bash(gh repo *)",
+      "Bash(curl -sI https://github.com/abhiidgaf-byte/nutrichef)",
+      "Bash(curl -s https://api.github.com/repos/abhiidgaf-byte/nutrichef)"
+    ]
+  }
+}
