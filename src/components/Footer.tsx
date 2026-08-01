@@ -113,7 +113,7 @@ export const Footer = () => {
 
         <div className="pt-12 border-t border-stone-200/80 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-stone-400 text-sm font-medium">
-            © 2026 NutriChef Health Technologies Pvt Ltd (Bangalore). All rights reserved.
+            © 2026 NutriChef, Bangalore. All rights reserved.
           </p>
           <div className="flex gap-8">
             <a href="#" className="text-stone-400 hover:text-stone-700 transition-colors text-sm font-medium">Privacy Policy</a>
