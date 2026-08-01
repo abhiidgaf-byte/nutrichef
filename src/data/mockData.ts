@@ -164,7 +164,7 @@ export const CHEFS: Chef[] = [
 export const DISH_COMPARISON: DishComparison = {
   title: "Same Dish, Tailored For You",
   dishName: "Paneer Makhani & Rice Bowl",
-  image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&q=80&w=800",
+  image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&q=80&w=800",
   standard: {
     calories: 890,
     carbs: 98,

@@ -44,3 +44,17 @@
     display: none;
   }
 }
+
+/* Slow ambient zoom for the CinematicStory dish photo — communicates "alive", not decoration */
+@keyframes kenburns {
+  from { transform: scale(1); }
+  to { transform: scale(1.12); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
