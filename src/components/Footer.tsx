@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, Instagram, Linkedin, Mail, Sparkles } from 'lucide-react';
+import { ArrowRight, Instagram, Linkedin, Mail } from 'lucide-react';
 
 interface FinalCTAProps {
   onStartFlow?: () => void;
@@ -8,7 +8,7 @@ interface FinalCTAProps {
 
 export const FinalCTA: React.FC<FinalCTAProps> = ({ onStartFlow }) => {
   return (
-    <section className="bg-white py-32 px-6 relative overflow-hidden border-t border-stone-200/80">
+    <section className="bg-[#FAF8F5] py-32 px-6 relative overflow-hidden border-t border-stone-200/80">
       {/* Background Ambience */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(16,185,129,0.08),transparent_70%)] pointer-events-none" />
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-stone-200 to-transparent" />
@@ -26,9 +26,9 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onStartFlow }) => {
           >
             Bangalore's Premier Nutrition Chef Service
           </motion.div>
-          <h2 className="text-5xl md:text-8xl font-bold text-stone-900 mb-8 tracking-tighter leading-[0.9]">
+          <h2 className="font-serif text-5xl md:text-8xl font-semibold text-stone-900 mb-8 tracking-tight leading-[0.95]">
             Stop Guessing. <br />
-            <span className="text-stone-400">
+            <span className="text-stone-400 italic">
               Start Engineering.
             </span>
           </h2>
@@ -37,25 +37,20 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onStartFlow }) => {
             Experience what it feels like to have a dedicated <span className="text-stone-900 font-bold italic">Nutrition Chef & Registered Dietitian</span> working for your family in Bangalore.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
-            <motion.button 
-              whileHover={{ scale: 1.02, y: -2 }}
-              whileTap={{ scale: 0.98 }}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button
               onClick={onStartFlow}
-              className="w-full sm:w-auto px-12 py-6 bg-amber-500 hover:bg-amber-400 text-stone-950 rounded-full font-black text-lg flex items-center justify-center gap-3 shadow-[0_15px_30px_rgba(245,158,11,0.25)] transition-all duration-300"
+              className="group w-full sm:w-auto px-10 py-5 bg-stone-900 hover:bg-stone-800 text-white font-medium text-sm uppercase tracking-[0.12em] flex items-center justify-center gap-3 transition-colors duration-200 cursor-pointer"
             >
-              <Sparkles className="w-5 h-5 text-stone-950" />
               Start Assessment Flow
-              <ArrowRight className="w-5 h-5" />
-            </motion.button>
-            <motion.button 
-              whileHover={{ scale: 1.02, y: -2 }}
-              whileTap={{ scale: 0.98 }}
+              <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+            </button>
+            <button
               onClick={onStartFlow}
-              className="w-full sm:w-auto px-12 py-6 bg-stone-100 text-stone-800 border border-stone-200 rounded-full font-bold text-lg hover:bg-stone-200 transition-all shadow-sm"
+              className="w-full sm:w-auto px-10 py-5 bg-transparent text-stone-900 border border-stone-300 font-medium text-sm uppercase tracking-[0.12em] hover:border-stone-900 transition-colors duration-200 cursor-pointer"
             >
               View Sample Plan
-            </motion.button>
+            </button>
           </div>
         </motion.div>
       </div>
@@ -73,7 +68,7 @@ export const Footer = () => {
                <div className="w-10 h-10 bg-emerald-800 rounded-xl flex items-center justify-center shadow-md shadow-emerald-800/20">
                   <span className="text-amber-400 font-bold italic text-xl">N</span>
                </div>
-               <span className="text-2xl font-bold text-stone-900 tracking-tight">NutriChef</span>
+               <span className="font-serif text-2xl font-semibold text-stone-900 tracking-tight">NutriChef</span>
             </div>
             <p className="text-stone-500 text-lg font-medium leading-relaxed max-w-xs">
               Bangalore's first subscription-based Personal Nutrition Chef platform.

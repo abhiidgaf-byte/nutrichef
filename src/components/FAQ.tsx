@@ -35,10 +35,10 @@ export const FAQ = () => {
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-8xl font-bold text-stone-900 tracking-tighter leading-[0.85] mb-8"
+            className="font-serif text-5xl md:text-8xl font-semibold text-stone-900 tracking-tight leading-[0.95] mb-8"
           >
             Clinical <br />
-            <span className="text-stone-400">Questions.</span>
+            <span className="text-stone-400 italic">Questions.</span>
           </motion.h2>
         </div>
 

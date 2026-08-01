@@ -33,7 +33,7 @@ export const Hero: React.FC<HeroProps> = ({ onStartFlow }) => {
   };
 
   return (
-    <section className="relative min-h-screen pt-28 pb-20 flex items-center bg-[#FAF8F5] overflow-hidden">
+    <section className="relative min-h-screen pt-36 pb-28 flex items-center bg-[#FAF8F5] overflow-hidden">
       {/* Background Ambience */}
       <motion.div 
         animate={{ 
@@ -54,24 +54,20 @@ export const Hero: React.FC<HeroProps> = ({ onStartFlow }) => {
           animate="visible"
           className="lg:col-span-6 space-y-6"
         >
-          <motion.div 
+          <motion.div
             variants={itemVariants}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-900 text-xs font-bold uppercase tracking-wider shadow-sm"
+            className="inline-flex items-center gap-2.5 text-stone-500 text-[11px] font-semibold uppercase tracking-[0.2em] border-b border-stone-300 pb-2"
           >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-600"></span>
-            </span>
-            <MapPin className="w-3.5 h-3.5 text-emerald-700" />
+            <MapPin className="w-3.5 h-3.5 text-stone-400" />
             Bangalore's Premier Personal Nutrition Chef Service
           </motion.div>
 
-          <motion.h1 
+          <motion.h1
             variants={itemVariants}
-            className="text-4xl sm:text-6xl lg:text-7xl font-black text-stone-900 tracking-tighter leading-[0.92]"
+            className="font-serif text-5xl sm:text-6xl lg:text-8xl font-semibold text-stone-900 tracking-tight leading-[1.02]"
           >
             Cooked For You, <br />
-            <span className="text-stone-500 font-bold">
+            <span className="text-stone-500 italic">
               Not Just For Everyone.
             </span>
           </motion.h1>
@@ -87,23 +83,19 @@ export const Hero: React.FC<HeroProps> = ({ onStartFlow }) => {
             variants={itemVariants}
             className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2"
           >
-            <motion.button 
-              whileHover={{ scale: 1.02, y: -2 }}
-              whileTap={{ scale: 0.98 }}
+            <button
               onClick={onStartFlow}
-              className="px-8 py-4 bg-amber-500 hover:bg-amber-400 text-stone-950 rounded-full font-black text-base flex items-center justify-center gap-3 shadow-xl shadow-amber-500/20 transition-all duration-300"
+              className="group px-8 py-4 bg-stone-900 hover:bg-stone-800 text-white font-medium text-sm uppercase tracking-[0.12em] flex items-center justify-center gap-3 transition-colors duration-200 cursor-pointer"
             >
               Let's Personalize It
-              <ArrowRight className="w-5 h-5" />
-            </motion.button>
-            <motion.button 
-              whileHover={{ scale: 1.02, y: -2 }}
-              whileTap={{ scale: 0.98 }}
+              <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+            </button>
+            <button
               onClick={onStartFlow}
-              className="px-8 py-4 bg-white text-stone-800 border border-stone-200/90 rounded-full font-bold text-sm hover:bg-stone-100 transition-all shadow-sm text-center"
+              className="px-8 py-4 bg-transparent text-stone-900 border border-stone-300 font-medium text-sm uppercase tracking-[0.12em] hover:border-stone-900 transition-colors duration-200 text-center cursor-pointer"
             >
               Explore Weekly Tiers
-            </motion.button>
+            </button>
           </motion.div>
 
           <motion.div 

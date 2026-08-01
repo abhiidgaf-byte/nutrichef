@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { 
-  Sparkles, 
-  ArrowRight, 
+import {
+  ArrowRight,
   CheckCircle2, 
   Activity, 
   Flame, 
@@ -43,13 +42,12 @@ export const BlueprintResult: React.FC<BlueprintResultProps> = ({
           animate={{ opacity: 1, y: 0 }}
           className="text-center space-y-4"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-800 text-amber-300 text-xs font-bold uppercase tracking-widest border border-emerald-700 shadow-md">
-            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-stone-900 text-white text-xs font-semibold uppercase tracking-[0.15em]">
             Clinical Nutrition Blueprint
           </div>
-          <h1 className="text-3xl sm:text-5xl font-bold text-stone-900 tracking-tight leading-tight">
+          <h1 className="font-serif text-3xl sm:text-5xl font-semibold text-stone-900 tracking-tight leading-tight">
             Your NutriChef Plan <br />
-            <span className="text-stone-500 font-normal">Engineered For {userProfile.name || 'You'}</span>
+            <span className="text-stone-500 italic font-normal">Engineered For {userProfile.name || 'You'}</span>
           </h1>
           <p className="text-stone-600 text-base max-w-xl mx-auto font-medium">
             Designed for <strong className="text-stone-900 font-bold">{userProfile.neighborhood || 'Koramangala'}</strong> household kitchen visits. Zero pre-cooked meals — cooked fresh in your kitchen by a certified Nutrition Chef.
@@ -63,20 +61,18 @@ export const BlueprintResult: React.FC<BlueprintResultProps> = ({
           transition={{ delay: 0.1 }}
           className="bg-stone-900 text-white rounded-[32px] p-6 sm:p-8 shadow-xl relative overflow-hidden"
         >
-          <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-[80px] pointer-events-none" />
-          
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center border-b border-stone-800 pb-6 mb-6">
             <div>
               <p className="text-stone-400 text-[10px] font-black uppercase tracking-widest mb-1">Daily Calories</p>
-              <p className="text-2xl sm:text-3xl font-black text-amber-400 flex items-center justify-center gap-1">
-                <Flame className="w-5 h-5 text-amber-500" />
+              <p className="text-2xl sm:text-3xl font-black text-white flex items-center justify-center gap-1">
+                <Flame className="w-5 h-5 text-stone-400" />
                 {targetCalories} <span className="text-xs font-normal text-stone-400">kcal</span>
               </p>
             </div>
             <div>
               <p className="text-stone-400 text-[10px] font-black uppercase tracking-widest mb-1">Daily Protein</p>
-              <p className="text-2xl sm:text-3xl font-black text-emerald-400 flex items-center justify-center gap-1">
-                <Dumbbell className="w-5 h-5 text-emerald-400" />
+              <p className="text-2xl sm:text-3xl font-black text-white flex items-center justify-center gap-1">
+                <Dumbbell className="w-5 h-5 text-stone-400" />
                 {targetProtein}
               </p>
             </div>
@@ -88,7 +84,7 @@ export const BlueprintResult: React.FC<BlueprintResultProps> = ({
             </div>
             <div>
               <p className="text-stone-400 text-[10px] font-black uppercase tracking-widest mb-1">Diet Style</p>
-              <p className="text-lg sm:text-xl font-bold text-amber-300">
+              <p className="text-lg sm:text-xl font-bold text-stone-100">
                 {userProfile.dietType} • {userProfile.spiceLevel}
               </p>
             </div>
@@ -99,7 +95,7 @@ export const BlueprintResult: React.FC<BlueprintResultProps> = ({
               <ShieldCheck className="w-4 h-4 text-emerald-400" />
               <span>Verified by Senior RD Dr. Ananya Sharma (Indian Dietetic Association)</span>
             </div>
-            <span className="text-amber-400 font-bold bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
+            <span className="text-stone-200 font-bold bg-white/10 px-3 py-1 border border-white/10">
               Low Glycemic Load Protocol
             </span>
           </div>
@@ -114,11 +110,11 @@ export const BlueprintResult: React.FC<BlueprintResultProps> = ({
         >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
             <div>
-              <span className="text-emerald-800 font-bold uppercase tracking-widest text-xs flex items-center gap-1.5 mb-1">
-                <Utensils className="w-3.5 h-3.5 text-amber-600" />
+              <span className="text-stone-500 font-bold uppercase tracking-widest text-xs flex items-center gap-1.5 mb-1">
+                <Utensils className="w-3.5 h-3.5 text-stone-400" />
                 Same Rice, Different You
               </span>
-              <h3 className="text-xl sm:text-2xl font-bold text-stone-900 tracking-tight">
+              <h3 className="font-serif text-xl sm:text-2xl font-semibold text-stone-900 tracking-tight">
                 How NutriChef Transforms Standard Indian Dishes
               </h3>
             </div>
@@ -141,7 +137,7 @@ export const BlueprintResult: React.FC<BlueprintResultProps> = ({
                 onClick={() => setActiveComparisonTab('nutriChef')}
                 className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
                   activeComparisonTab === 'nutriChef'
-                    ? 'bg-emerald-800 text-amber-300 shadow-md'
+                    ? 'bg-stone-900 text-white shadow-sm'
                     : 'text-stone-600 hover:text-stone-900'
                 }`}
               >
@@ -252,10 +248,10 @@ export const BlueprintResult: React.FC<BlueprintResultProps> = ({
         {/* Weekly Meal Plan Preview Cards */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-2xl font-bold text-stone-900 tracking-tight">
+            <h3 className="font-serif text-2xl font-semibold text-stone-900 tracking-tight">
               Sample Weekly Home-Cooked Schedule
             </h3>
-            <span className="text-xs font-bold text-amber-700 bg-amber-100 px-3 py-1 rounded-full border border-amber-200">
+            <span className="text-xs font-bold text-stone-700 bg-stone-100 px-3 py-1 border border-stone-200">
               2 Cook Visits / Day (7 Days / Week)
             </span>
           </div>
@@ -265,20 +261,20 @@ export const BlueprintResult: React.FC<BlueprintResultProps> = ({
               <div key={meal.id} className="bg-white rounded-3xl border border-stone-200 p-5 shadow-sm space-y-4">
                 <div className="flex items-center justify-between border-b border-stone-100 pb-3">
                   <span className="font-bold text-stone-900 text-base">{meal.dayName}</span>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-stone-600 bg-stone-100 px-2.5 py-1 border border-stone-200">
                     {meal.dateStr}
                   </span>
                 </div>
 
                 {/* Lunch */}
                 <div className="space-y-1">
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-amber-700">Lunch Meal</p>
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-stone-500">Lunch Meal</p>
                   <p className="font-bold text-stone-900 text-sm leading-snug">{meal.lunch.title}</p>
                   <p className="text-xs text-stone-500 leading-relaxed">{meal.lunch.description}</p>
                   <div className="flex gap-2 text-[10px] font-bold text-stone-600 pt-1">
-                    <span>🔥 {meal.lunch.calories} kcal</span>
+                    <span>{meal.lunch.calories} kcal</span>
                     <span>•</span>
-                    <span className="text-emerald-800 font-bold">💪 {meal.lunch.protein}g Protein</span>
+                    <span className="text-stone-900 font-bold">{meal.lunch.protein}g Protein</span>
                   </div>
                 </div>
 
@@ -294,27 +290,24 @@ export const BlueprintResult: React.FC<BlueprintResultProps> = ({
         </div>
 
         {/* Bottom CTA Box */}
-        <motion.div 
-          whileHover={{ scale: 1.01 }}
-          className="bg-emerald-900 text-white rounded-[32px] p-8 text-center space-y-6 shadow-2xl relative overflow-hidden"
-        >
+        <div className="bg-stone-900 text-white p-8 text-center space-y-6 relative overflow-hidden">
           <div className="max-w-xl mx-auto space-y-3 relative z-10">
-            <h3 className="text-2xl sm:text-3xl font-bold tracking-tight">
+            <h3 className="font-serif text-2xl sm:text-3xl font-semibold tracking-tight">
               Ready to bring NutriChef into your kitchen?
             </h3>
-            <p className="text-emerald-100 text-sm font-medium">
+            <p className="text-stone-300 text-sm font-medium">
               Choose your weekly visit tier. No long term lock-in — pause or cancel anytime.
             </p>
             <button
               type="button"
               onClick={onNext}
-              className="mt-4 px-10 py-4 bg-amber-500 hover:bg-amber-400 text-stone-950 font-black text-base rounded-full shadow-xl shadow-amber-500/30 transition-all flex items-center justify-center gap-3 mx-auto transform hover:-translate-y-0.5"
+              className="mt-4 px-10 py-4 bg-white hover:bg-stone-200 text-stone-900 font-medium text-sm uppercase tracking-[0.1em] transition-colors duration-200 flex items-center justify-center gap-3 mx-auto cursor-pointer"
             >
               Choose Your Subscription Plan
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-4 h-4" />
             </button>
           </div>
-        </motion.div>
+        </div>
 
       </div>
     </div>

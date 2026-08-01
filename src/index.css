@@ -1,9 +1,30 @@
 @import "tailwindcss";
 
+@theme {
+  /* Editorial luxury type system: Playfair Display for display headlines,
+     Inter for body/UI text. font-serif / font-sans utilities pick these up. */
+  --font-serif: 'Playfair Display', 'Georgia', serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
 @layer base {
   body {
     @apply bg-black text-white antialiased overflow-x-hidden;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+    position: relative;
+  }
+
+  /* Subtle paper-grain texture so the cream background reads as warm paper,
+     not flat/empty white. Fixed + very low opacity so it never competes with content. */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.035;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
   /* Interactive active pseudo-class state transitions */

@@ -128,9 +128,9 @@ export const CinematicStory = () => {
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
               Same Rice, Different You
             </div>
-            <h2 className="text-4xl md:text-6xl font-black text-stone-900 tracking-tighter leading-[0.9] mb-6">
+            <h2 className="font-serif text-4xl md:text-6xl font-semibold text-stone-900 tracking-tight leading-[0.95] mb-6">
               One Dish. <br />
-              <span className="text-emerald-700">Two Completely Different Outcomes.</span>
+              <span className="text-emerald-700 italic">Two Completely Different Outcomes.</span>
             </h2>
             <p className="text-stone-600 text-lg font-light leading-relaxed max-w-lg">
               Chef {chefFirstName} rebuilds the exact same dish you already eat — same comfort, same flavor — engineered to hit your actual health targets instead of working against them.
@@ -157,9 +157,9 @@ export const CinematicStory = () => {
               <Zap className="w-3.5 h-3.5 text-rose-600" />
               Same Rice, Different You
             </div>
-            <h2 className="text-5xl md:text-7xl font-black text-stone-900 tracking-tighter leading-[0.9] mb-6">
+            <h2 className="font-serif text-5xl md:text-7xl font-semibold text-stone-900 tracking-tight leading-[1] mb-6">
               Looks Identical. <br />
-              <span className="text-rose-600">Isn't Even Close.</span>
+              <span className="text-rose-600 italic">Isn't Even Close.</span>
             </h2>
             <p className="text-stone-600 text-xl font-light leading-relaxed max-w-lg">
               The paneer makhani you order tonight and the one your chef cooks tomorrow can look the same on the plate — and land nowhere near the same on your blood sugar.
@@ -171,7 +171,7 @@ export const CinematicStory = () => {
               <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
               Step 01 — We Learn You
             </div>
-            <h2 className="text-4xl md:text-6xl font-bold text-stone-900 tracking-tighter mb-6 leading-tight">
+            <h2 className="font-serif text-4xl md:text-6xl font-semibold text-stone-900 tracking-tight mb-6 leading-tight">
               Every body deserves <br /> its own plan.
             </h2>
             <p className="text-stone-600 text-lg font-light leading-relaxed max-w-lg mb-8">
@@ -191,7 +191,7 @@ export const CinematicStory = () => {
               <ChefHat className="w-3.5 h-3.5 text-emerald-600" />
               Step 02 — Chef {chefFirstName} Rebuilds It
             </div>
-            <h2 className="text-4xl md:text-6xl font-bold text-stone-900 tracking-tighter mb-6 leading-tight">
+            <h2 className="font-serif text-4xl md:text-6xl font-semibold text-stone-900 tracking-tight mb-6 leading-tight">
               Watch the numbers <br /> change in real time.
             </h2>
             <p className="text-stone-600 text-xl font-light leading-relaxed max-w-lg">
@@ -204,9 +204,9 @@ export const CinematicStory = () => {
               <ChefHat className="w-3.5 h-3.5 text-emerald-600" />
               Step 03 — Cooked In Your Kitchen
             </div>
-            <h2 className="text-5xl md:text-7xl font-black text-stone-900 tracking-tighter mb-6 leading-tight">
+            <h2 className="font-serif text-5xl md:text-7xl font-semibold text-stone-900 tracking-tight mb-6 leading-tight">
               Culinary Luxury. <br />
-              <span className="text-emerald-700">In Your Kitchen.</span>
+              <span className="text-emerald-700 italic">In Your Kitchen.</span>
             </h2>
             <p className="text-stone-600 text-xl font-light leading-relaxed max-w-lg">
               Chef {chefFirstName} arrives with real, prepped ingredients and cooks it fresh — right on your stove, while you watch.
@@ -218,7 +218,7 @@ export const CinematicStory = () => {
               <TrendingUp className="w-3.5 h-3.5 text-emerald-600" />
               Step 04 — The Result
             </div>
-            <h2 className="text-4xl md:text-6xl font-bold text-stone-900 tracking-tighter mb-6 leading-tight">
+            <h2 className="font-serif text-4xl md:text-6xl font-semibold text-stone-900 tracking-tight mb-6 leading-tight">
               A dish you already <br /> love. Working for you.
             </h2>
             <p className="text-stone-600 text-xl font-light leading-relaxed max-w-lg">
@@ -231,9 +231,9 @@ export const CinematicStory = () => {
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
               NutriChef Standard
             </div>
-            <h2 className="text-5xl md:text-7xl font-black text-stone-900 tracking-tighter leading-[0.85] mb-6">
+            <h2 className="font-serif text-5xl md:text-7xl font-semibold text-stone-900 tracking-tight leading-[0.95] mb-6">
               Your Personal <br />
-              <span className="text-emerald-700">Nutrition Chef.</span>
+              <span className="text-emerald-700 italic">Nutrition Chef.</span>
             </h2>
             <p className="text-stone-600 text-xl font-light leading-relaxed max-w-lg">
               Supported by medical nutritionists. Prepared by dedicated chefs. Driven by your health.

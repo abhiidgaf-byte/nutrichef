@@ -1,27 +1,28 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { 
-  User, 
-  MapPin, 
-  Phone, 
-  ArrowRight, 
-  ArrowLeft, 
-  CheckCircle2, 
-  Sparkles, 
-  ShieldAlert, 
-  Activity, 
-  HeartPulse, 
-  TrendingDown, 
-  Award, 
-  Flame, 
-  Dumbbell, 
-  Heart, 
+import {
+  User,
+  MapPin,
+  Phone,
+  ArrowRight,
+  ArrowLeft,
+  CheckCircle2,
+  ShieldAlert,
+  Activity,
+  HeartPulse,
+  TrendingDown,
+  Award,
+  Flame,
+  Dumbbell,
+  Heart,
   Zap,
   Utensils,
-  ChevronRight
+  ChevronRight,
+  Info,
+  Leaf
 } from 'lucide-react';
 import { UserProfile } from '../types';
-import { BANGALORE_NEIGHBORHOODS, HEALTH_CONDITIONS, GOALS } from '../data/mockData';
+import { BANGALORE_NEIGHBORHOODS, HEALTH_CONDITIONS, GOALS, CUISINE_STYLES } from '../data/mockData';
 
 interface IntakeFormProps {
   userProfile: UserProfile;
@@ -30,6 +31,13 @@ interface IntakeFormProps {
   onComplete?: () => void;
   onCancel?: () => void;
 }
+
+const GOAL_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+  Flame,
+  Dumbbell,
+  Heart,
+  Zap,
+};
 
 export const IntakeForm: React.FC<IntakeFormProps> = ({
   userProfile,
@@ -80,21 +88,20 @@ export const IntakeForm: React.FC<IntakeFormProps> = ({
 
   const renderStepIndicator = () => (
     <div className="mb-10">
-      <div className="flex items-center justify-between mb-3 text-xs font-bold uppercase tracking-wider text-stone-500">
-        <span className="flex items-center gap-1.5 text-amber-700 font-black">
-          <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+      <div className="flex items-center justify-between mb-3 text-[11px] font-semibold uppercase tracking-[0.15em] text-stone-500">
+        <span className="text-stone-900">
           Step {step} of {totalSteps}
         </span>
-        <span className="text-stone-600 font-semibold">
+        <span className="text-stone-500">
           {step === 1 && 'Basic Profile'}
           {step === 2 && 'Health Conditions'}
           {step === 3 && 'Nutrition Goals'}
           {step === 4 && 'Food & Cuisine'}
         </span>
       </div>
-      <div className="h-2 w-full bg-stone-200/80 rounded-full overflow-hidden p-0.5 border border-stone-300/50">
-        <motion.div 
-          className="h-full bg-gradient-to-r from-emerald-800 via-emerald-600 to-amber-600 rounded-full"
+      <div className="h-1 w-full bg-stone-200/80 overflow-hidden">
+        <motion.div
+          className="h-full bg-stone-900"
           initial={{ width: `${((step - 1) / totalSteps) * 100}%` }}
           animate={{ width: `${(step / totalSteps) * 100}%` }}
           transition={{ duration: 0.4, ease: "easeOut" }}
@@ -104,28 +111,37 @@ export const IntakeForm: React.FC<IntakeFormProps> = ({
   );
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5] pt-24 pb-20 px-4 sm:px-6 flex flex-col justify-center items-center">
-      <div className="w-full max-w-2xl mx-auto">
-        
+    <div className="relative min-h-screen bg-[#FAF8F5] pt-24 pb-20 px-4 sm:px-6 flex flex-col justify-center items-center overflow-hidden">
+      {/* Ambient background — quiet, slow-moving, not decorative noise: a nod to the
+          botanical/nutrition subject matter without undermining the serious, clinical tone */}
+      <motion.div
+        animate={{ opacity: [0.15, 0.25, 0.15] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-0 right-0 w-[700px] h-[700px] bg-emerald-900/10 rounded-full blur-[160px] -translate-y-1/3 translate-x-1/4 pointer-events-none"
+      />
+      <Leaf className="absolute top-24 right-[8%] w-24 h-24 text-emerald-900/[0.04] hidden lg:block pointer-events-none" strokeWidth={1} />
+
+      <div className="w-full max-w-2xl mx-auto relative z-10">
+
         {/* Reassuring Banner */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-6 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-900 text-xs sm:text-sm font-medium flex items-center gap-3 shadow-sm"
+          className="mb-6 p-4 bg-white border border-stone-200 text-stone-700 text-xs sm:text-sm font-medium flex items-center gap-3"
         >
-          <div className="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-800 flex items-center justify-center shrink-0 font-bold">
-            💡
+          <div className="w-8 h-8 bg-stone-100 text-stone-700 flex items-center justify-center shrink-0">
+            <Info className="w-4 h-4" />
           </div>
           <p>
-            <strong className="font-bold text-amber-950">Personalized for Bangalore households:</strong> This intake helps our NutriChef registered dietitian engineer a weekly menu tailored to your health biomarkers.
+            <strong className="font-semibold text-stone-900">Personalized for Bangalore households:</strong> This intake helps our NutriChef registered dietitian engineer a weekly menu tailored to your health biomarkers.
           </p>
         </motion.div>
 
         {/* Form Container Card */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="bg-white rounded-[32px] sm:rounded-[40px] border border-stone-200/80 p-6 sm:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.05)]"
+          className="bg-white border border-stone-200/80 p-6 sm:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.04)]"
         >
           {renderStepIndicator()}
 
@@ -141,7 +157,7 @@ export const IntakeForm: React.FC<IntakeFormProps> = ({
                 className="space-y-6"
               >
                 <div>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-stone-900 tracking-tight mb-2">
+                  <h2 className="font-serif text-2xl sm:text-3xl font-semibold text-stone-900 tracking-tight mb-2">
                     Let's start with your details
                   </h2>
                   <p className="text-stone-500 text-sm">
@@ -202,7 +218,7 @@ export const IntakeForm: React.FC<IntakeFormProps> = ({
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2 flex items-center justify-between">
                       <span>Bangalore Neighborhood</span>
-                      <span className="text-emerald-700 font-bold text-[10px] lowercase">Active Service Area</span>
+                      <span className="text-stone-500 font-semibold text-[10px] lowercase">Active Service Area</span>
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                       {BANGALORE_NEIGHBORHOODS.map((loc) => {
@@ -212,14 +228,14 @@ export const IntakeForm: React.FC<IntakeFormProps> = ({
                             key={loc}
                             type="button"
                             onClick={() => setUserProfile({ ...userProfile, neighborhood: loc })}
-                            className={`p-3 rounded-2xl text-xs font-bold transition-all text-left flex items-center justify-between border ${
+                            className={`p-3 text-xs font-semibold transition-colors duration-200 text-left flex items-center justify-between border cursor-pointer ${
                               isSelected
-                                ? 'bg-emerald-800 text-white border-emerald-800 shadow-md shadow-emerald-800/20'
-                                : 'bg-stone-50 text-stone-700 border-stone-200 hover:bg-stone-100'
+                                ? 'bg-stone-900 text-white border-stone-900'
+                                : 'bg-stone-50 text-stone-700 border-stone-200 hover:border-stone-400'
                             }`}
                           >
                             <span className="truncate">{loc}</span>
-                            {isSelected && <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0 ml-1" />}
+                            {isSelected && <CheckCircle2 className="w-3.5 h-3.5 text-white shrink-0 ml-1" />}
                           </button>
                         );
                       })}
@@ -238,7 +254,7 @@ export const IntakeForm: React.FC<IntakeFormProps> = ({
                   <button
                     type="button"
                     onClick={() => setStep(2)}
-                    className="px-8 py-3.5 bg-emerald-800 text-white rounded-2xl font-bold text-sm shadow-lg shadow-emerald-800/20 hover:bg-emerald-900 transition-all flex items-center gap-2"
+                    className="px-8 py-3.5 bg-stone-900 hover:bg-stone-800 text-white font-medium text-sm uppercase tracking-[0.1em] transition-colors duration-200 flex items-center gap-2 cursor-pointer"
                   >
                     Continue to Health Conditions
                     <ArrowRight className="w-4 h-4" />
@@ -258,7 +274,7 @@ export const IntakeForm: React.FC<IntakeFormProps> = ({
                 className="space-y-6"
               >
                 <div>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-stone-900 tracking-tight mb-2">
+                  <h2 className="font-serif text-2xl sm:text-3xl font-semibold text-stone-900 tracking-tight mb-2">
                     Health Conditions & Biomarkers
                   </h2>
                   <p className="text-stone-500 text-sm">
@@ -276,26 +292,26 @@ export const IntakeForm: React.FC<IntakeFormProps> = ({
                         whileHover={{ scale: 1.01 }}
                         whileTap={{ scale: 0.99 }}
                         onClick={() => handleConditionToggle(cond.name)}
-                        className={`p-4 rounded-2xl border text-left transition-all relative flex flex-col justify-between ${
+                        className={`p-4 border text-left transition-colors duration-200 relative flex flex-col justify-between ${
                           isSelected
-                            ? 'bg-stone-900 text-white border-stone-900 shadow-md'
-                            : 'bg-stone-50/80 text-stone-800 border-stone-200 hover:border-stone-300 hover:bg-white'
+                            ? 'bg-stone-900 text-white border-stone-900'
+                            : 'bg-stone-50/80 text-stone-800 border-stone-200 hover:border-stone-400 hover:bg-white'
                         }`}
                       >
                         <div>
                           <div className="flex items-center justify-between mb-2">
-                            <span className={`text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full ${
-                              isSelected ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30' : 'bg-stone-200/80 text-stone-700'
+                            <span className={`text-[10px] font-black uppercase tracking-widest px-2.5 py-1 border ${
+                              isSelected ? 'border-white/30 text-white/80' : 'bg-stone-200/80 text-stone-700 border-transparent'
                             }`}>
                               {cond.badge}
                             </span>
-                            <div className={`w-5 h-5 rounded-full border flex items-center justify-center transition-all ${
-                              isSelected ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-stone-300'
+                            <div className={`w-5 h-5 rounded-full border flex items-center justify-center transition-colors duration-200 ${
+                              isSelected ? 'bg-white border-white' : 'border-stone-300'
                             }`}>
-                              {isSelected && <CheckCircle2 className="w-3.5 h-3.5 stroke-[3]" />}
+                              {isSelected && <CheckCircle2 className="w-3.5 h-3.5 stroke-[3] text-stone-900" />}
                             </div>
                           </div>
-                          <h4 className="font-bold text-base mb-1 tracking-tight">{cond.name}</h4>
+                          <h4 className="font-semibold text-base mb-1 tracking-tight">{cond.name}</h4>
                           <p className={`text-xs leading-relaxed ${isSelected ? 'text-stone-300' : 'text-stone-500'}`}>
                             {cond.description}
                           </p>
@@ -309,7 +325,7 @@ export const IntakeForm: React.FC<IntakeFormProps> = ({
                   <button
                     type="button"
                     onClick={() => setStep(1)}
-                    className="px-5 py-3 border border-stone-200 rounded-2xl text-stone-700 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 hover:bg-stone-100"
+                    className="px-5 py-3 border border-stone-300 text-stone-700 text-xs font-semibold uppercase tracking-[0.1em] flex items-center gap-1.5 hover:border-stone-900 hover:text-stone-900 transition-colors duration-200 cursor-pointer"
                   >
                     <ArrowLeft className="w-4 h-4" />
                     Back
@@ -317,7 +333,7 @@ export const IntakeForm: React.FC<IntakeFormProps> = ({
                   <button
                     type="button"
                     onClick={() => setStep(3)}
-                    className="px-8 py-3.5 bg-emerald-800 text-white rounded-2xl font-bold text-sm shadow-lg shadow-emerald-800/20 hover:bg-emerald-900 transition-all flex items-center gap-2"
+                    className="px-8 py-3.5 bg-stone-900 hover:bg-stone-800 text-white font-medium text-sm uppercase tracking-[0.1em] transition-colors duration-200 flex items-center gap-2 cursor-pointer"
                   >
                     Continue to Goals
                     <ArrowRight className="w-4 h-4" />
@@ -337,7 +353,7 @@ export const IntakeForm: React.FC<IntakeFormProps> = ({
                 className="space-y-6"
               >
                 <div>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-stone-900 tracking-tight mb-2">
+                  <h2 className="font-serif text-2xl sm:text-3xl font-semibold text-stone-900 tracking-tight mb-2">
                     Primary Nutrition Goals
                   </h2>
                   <p className="text-stone-500 text-sm">
@@ -348,6 +364,7 @@ export const IntakeForm: React.FC<IntakeFormProps> = ({
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {GOALS.map((goal) => {
                     const isSelected = userProfile.goals.includes(goal.name);
+                    const GoalIcon = GOAL_ICONS[goal.iconName] ?? Zap;
                     return (
                       <motion.button
                         key={goal.id}
@@ -355,26 +372,26 @@ export const IntakeForm: React.FC<IntakeFormProps> = ({
                         whileHover={{ scale: 1.01 }}
                         whileTap={{ scale: 0.99 }}
                         onClick={() => handleGoalToggle(goal.name)}
-                        className={`p-5 rounded-2xl border text-left transition-all ${
+                        className={`p-5 border text-left transition-colors duration-200 ${
                           isSelected
-                            ? 'bg-emerald-900 text-white border-emerald-900 shadow-lg shadow-emerald-900/10'
-                            : 'bg-stone-50/80 text-stone-800 border-stone-200 hover:border-stone-300 hover:bg-white'
+                            ? 'bg-stone-900 text-white border-stone-900'
+                            : 'bg-stone-50/80 text-stone-800 border-stone-200 hover:border-stone-400 hover:bg-white'
                         }`}
                       >
                         <div className="flex items-center justify-between mb-3">
-                          <span className={`w-8 h-8 rounded-xl flex items-center justify-center font-bold text-sm ${
-                            isSelected ? 'bg-emerald-800 text-amber-400' : 'bg-stone-200/80 text-stone-700'
+                          <span className={`w-8 h-8 flex items-center justify-center ${
+                            isSelected ? 'bg-white/10 text-white' : 'bg-stone-200/80 text-stone-700'
                           }`}>
-                            ⚡
+                            <GoalIcon className="w-4 h-4" />
                           </span>
                           <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${
-                            isSelected ? 'bg-amber-500 border-amber-500 text-stone-950 font-bold' : 'border-stone-300'
+                            isSelected ? 'bg-white border-white' : 'border-stone-300'
                           }`}>
-                            {isSelected && <CheckCircle2 className="w-3.5 h-3.5 stroke-[3]" />}
+                            {isSelected && <CheckCircle2 className="w-3.5 h-3.5 stroke-[3] text-stone-900" />}
                           </div>
                         </div>
-                        <h4 className="font-bold text-base mb-1">{goal.name}</h4>
-                        <p className={`text-xs leading-relaxed ${isSelected ? 'text-emerald-100' : 'text-stone-500'}`}>
+                        <h4 className="font-semibold text-base mb-1">{goal.name}</h4>
+                        <p className={`text-xs leading-relaxed ${isSelected ? 'text-stone-300' : 'text-stone-500'}`}>
                           {goal.description}
                         </p>
                       </motion.button>
@@ -386,7 +403,7 @@ export const IntakeForm: React.FC<IntakeFormProps> = ({
                   <button
                     type="button"
                     onClick={() => setStep(2)}
-                    className="px-5 py-3 border border-stone-200 rounded-2xl text-stone-700 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 hover:bg-stone-100"
+                    className="px-5 py-3 border border-stone-300 text-stone-700 text-xs font-semibold uppercase tracking-[0.1em] flex items-center gap-1.5 hover:border-stone-900 hover:text-stone-900 transition-colors duration-200 cursor-pointer"
                   >
                     <ArrowLeft className="w-4 h-4" />
                     Back
@@ -394,7 +411,7 @@ export const IntakeForm: React.FC<IntakeFormProps> = ({
                   <button
                     type="button"
                     onClick={() => setStep(4)}
-                    className="px-8 py-3.5 bg-emerald-800 text-white rounded-2xl font-bold text-sm shadow-lg shadow-emerald-800/20 hover:bg-emerald-900 transition-all flex items-center gap-2"
+                    className="px-8 py-3.5 bg-stone-900 hover:bg-stone-800 text-white font-medium text-sm uppercase tracking-[0.1em] transition-colors duration-200 flex items-center gap-2 cursor-pointer"
                   >
                     Continue to Food Preferences
                     <ArrowRight className="w-4 h-4" />
@@ -414,7 +431,7 @@ export const IntakeForm: React.FC<IntakeFormProps> = ({
                 className="space-y-6"
               >
                 <div>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-stone-900 tracking-tight mb-2">
+                  <h2 className="font-serif text-2xl sm:text-3xl font-semibold text-stone-900 tracking-tight mb-2">
                     Dietary & Culinary Preferences
                   </h2>
                   <p className="text-stone-500 text-sm">
@@ -436,10 +453,10 @@ export const IntakeForm: React.FC<IntakeFormProps> = ({
                             key={diet}
                             type="button"
                             onClick={() => setUserProfile({ ...userProfile, dietType: diet })}
-                            className={`py-3 px-3 rounded-2xl text-xs font-bold border transition-all text-center ${
+                            className={`py-3 px-3 text-xs font-semibold border transition-colors duration-200 text-center cursor-pointer ${
                               isSelected
-                                ? 'bg-emerald-800 text-white border-emerald-800 shadow-md'
-                                : 'bg-stone-50 text-stone-700 border-stone-200 hover:bg-stone-100'
+                                ? 'bg-stone-900 text-white border-stone-900'
+                                : 'bg-stone-50 text-stone-700 border-stone-200 hover:border-stone-400'
                             }`}
                           >
                             {diet}
@@ -454,16 +471,37 @@ export const IntakeForm: React.FC<IntakeFormProps> = ({
                     <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">
                       Cuisine Style
                     </label>
-                    <select
-                      value={userProfile.cuisinePreference}
-                      onChange={(e) => setUserProfile({ ...userProfile, cuisinePreference: e.target.value })}
-                      className="w-full px-4 py-3.5 bg-stone-50 border border-stone-200 rounded-2xl text-stone-900 font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-700/30 text-sm"
-                    >
-                      <option value="North & South Indian Fusion">North & South Indian Fusion (Most Popular)</option>
-                      <option value="Classic South Indian (Sambar, Poriyal, Millet Dosa)">Classic South Indian</option>
-                      <option value="Traditional North Indian (Sabzi, Dal, Phulkas)">Traditional North Indian</option>
-                      <option value="Pan-Asian & Continental Healthy Fusion">Pan-Asian & Continental Fusion</option>
-                    </select>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {CUISINE_STYLES.map((cuisine) => {
+                        const isSelected = userProfile.cuisinePreference === cuisine.value;
+                        return (
+                          <button
+                            key={cuisine.value}
+                            type="button"
+                            onClick={() => setUserProfile({ ...userProfile, cuisinePreference: cuisine.value })}
+                            className={`p-4 border text-left transition-colors duration-200 cursor-pointer ${
+                              isSelected
+                                ? 'bg-stone-900 border-stone-900 text-white'
+                                : 'bg-stone-50 border-stone-200 text-stone-800 hover:border-stone-400'
+                            }`}
+                          >
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="font-semibold text-sm">{cuisine.name}</span>
+                              {cuisine.popular && (
+                                <span className={`text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 border ${
+                                  isSelected ? 'border-white/30 text-white/80' : 'border-stone-300 text-stone-500'
+                                }`}>
+                                  Most Popular
+                                </span>
+                              )}
+                            </div>
+                            <p className={`text-xs leading-relaxed ${isSelected ? 'text-stone-300' : 'text-stone-500'}`}>
+                              {cuisine.description}
+                            </p>
+                          </button>
+                        );
+                      })}
+                    </div>
                   </div>
 
                   {/* Spice Level */}
@@ -472,22 +510,34 @@ export const IntakeForm: React.FC<IntakeFormProps> = ({
                       Preferred Spice Level
                     </label>
                     <div className="grid grid-cols-3 gap-2">
-                      {(['Mild', 'Medium', 'Authentic Indian'] as const).map((spice) => {
+                      {([
+                        { level: 'Mild', intensity: 1 },
+                        { level: 'Medium', intensity: 2 },
+                        { level: 'Authentic Indian', intensity: 3 },
+                      ] as const).map(({ level: spice, intensity }) => {
                         const isSelected = userProfile.spiceLevel === spice;
                         return (
                           <button
                             key={spice}
                             type="button"
                             onClick={() => setUserProfile({ ...userProfile, spiceLevel: spice })}
-                            className={`py-3 px-2 rounded-2xl text-xs font-bold border transition-all text-center ${
+                            className={`py-3 px-2 border text-xs font-semibold transition-colors duration-200 text-center flex flex-col items-center gap-1.5 cursor-pointer ${
                               isSelected
-                                ? 'bg-amber-600 text-white border-amber-600 shadow-md'
-                                : 'bg-stone-50 text-stone-700 border-stone-200 hover:bg-stone-100'
+                                ? 'bg-stone-900 text-white border-stone-900'
+                                : 'bg-stone-50 text-stone-700 border-stone-200 hover:border-stone-400'
                             }`}
                           >
-                            {spice === 'Mild' && '🌶️ Mild'}
-                            {spice === 'Medium' && '🌶️🌶️ Medium'}
-                            {spice === 'Authentic Indian' && '🌶️🌶️🌶️ Authentic'}
+                            <span className="flex gap-1">
+                              {[1, 2, 3].map(i => (
+                                <span
+                                  key={i}
+                                  className={`w-1.5 h-1.5 rounded-full ${
+                                    i <= intensity ? (isSelected ? 'bg-white' : 'bg-stone-900') : (isSelected ? 'bg-white/30' : 'bg-stone-300')
+                                  }`}
+                                />
+                              ))}
+                            </span>
+                            {spice === 'Authentic Indian' ? 'Authentic' : spice}
                           </button>
                         );
                       })}
@@ -499,7 +549,7 @@ export const IntakeForm: React.FC<IntakeFormProps> = ({
                   <button
                     type="button"
                     onClick={() => setStep(3)}
-                    className="px-5 py-3 border border-stone-200 rounded-2xl text-stone-700 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 hover:bg-stone-100"
+                    className="px-5 py-3 border border-stone-300 text-stone-700 text-xs font-semibold uppercase tracking-[0.1em] flex items-center gap-1.5 hover:border-stone-900 hover:text-stone-900 transition-colors duration-200 cursor-pointer"
                   >
                     <ArrowLeft className="w-4 h-4" />
                     Back
@@ -507,10 +557,10 @@ export const IntakeForm: React.FC<IntakeFormProps> = ({
                   <button
                     type="button"
                     onClick={handleFinish}
-                    className="px-8 py-4 bg-amber-600 hover:bg-amber-700 text-white rounded-2xl font-black text-sm shadow-xl shadow-amber-600/30 transition-all flex items-center gap-2 transform hover:-translate-y-0.5"
+                    className="px-8 py-4 bg-stone-900 hover:bg-stone-800 text-white font-medium text-sm uppercase tracking-[0.1em] transition-colors duration-200 flex items-center gap-2 cursor-pointer"
                   >
-                    <Sparkles className="w-4 h-4 text-amber-200" />
                     Analyze & Build My Plan
+                    <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
               </motion.div>

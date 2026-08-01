@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, ArrowLeft, Sparkles, MapPin, ChevronDown } from 'lucide-react';
+import { Menu, X, ArrowLeft, MapPin, ChevronDown } from 'lucide-react';
 import { FlowStep } from '../types';
 
 interface NavbarProps {
@@ -68,7 +68,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className="text-amber-400 font-bold italic text-lg">N</span>
           </div>
           <div>
-            <span className="text-xl font-bold tracking-tight text-stone-900 block leading-none">
+            <span className="font-serif text-xl font-semibold tracking-tight text-stone-900 block leading-none">
               NutriChef
             </span>
             <span className="text-[9px] font-bold tracking-widest text-emerald-800 uppercase block mt-0.5">
@@ -110,15 +110,12 @@ export const Navbar: React.FC<NavbarProps> = ({
               >
                 Sign In
               </button>
-              <motion.button 
-                whileHover={{ scale: 1.02, y: -1 }}
-                whileTap={{ scale: 0.98 }}
+              <button
                 onClick={onStartFlow}
-                className="px-6 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-amber-300 rounded-full text-xs font-black uppercase tracking-wider shadow-md shadow-emerald-800/20 transition-all flex items-center gap-2"
+                className="px-6 py-2.5 bg-stone-900 hover:bg-stone-800 text-white text-xs font-medium uppercase tracking-[0.12em] transition-colors duration-200 cursor-pointer"
               >
-                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
                 Start Journey
-              </motion.button>
+              </button>
             </div>
           </>
         ) : (
@@ -214,7 +211,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onStartFlow?.();
                 setMobileMenuOpen(false);
               }}
-              className="w-full py-3 bg-emerald-800 text-amber-300 rounded-xl text-center shadow-md font-bold"
+              className="w-full py-3 bg-stone-900 text-white text-center font-medium uppercase tracking-[0.12em] text-xs cursor-pointer"
             >
               Start Intake Flow
             </button>

@@ -1,18 +1,14 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { 
-  CheckCircle2, 
-  Star, 
-  ShieldCheck, 
-  Calendar, 
-  Clock, 
-  ArrowRight, 
-  ArrowLeft, 
-  Sparkles,
-  MapPin,
-  Award,
-  ChevronLeft,
-  ChevronRight
+import {
+  CheckCircle2,
+  Star,
+  ShieldCheck,
+  Calendar,
+  Clock,
+  ArrowRight,
+  ArrowLeft,
+  Award
 } from 'lucide-react';
 import { CHEFS } from '../data/mockData';
 import { UserProfile, VisitSchedule } from '../types';
@@ -63,11 +59,10 @@ export const CookSchedule: React.FC<CookScheduleProps> = ({
           animate={{ opacity: 1, y: 0 }}
           className="text-center space-y-3"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-800 text-amber-300 text-xs font-bold uppercase tracking-widest border border-emerald-700 shadow-md">
-            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-stone-900 text-white text-xs font-semibold uppercase tracking-[0.15em]">
             Neighborhood Matched Chef
           </div>
-          <h1 className="text-3xl sm:text-5xl font-bold text-stone-900 tracking-tight">
+          <h1 className="font-serif text-3xl sm:text-5xl font-semibold text-stone-900 tracking-tight">
             Your Personal NutriChef
           </h1>
           <p className="text-stone-600 text-sm sm:text-base font-medium max-w-lg mx-auto">
@@ -85,23 +80,23 @@ export const CookSchedule: React.FC<CookScheduleProps> = ({
             
             {/* Chef Photo & Rating */}
             <div className="md:col-span-4 flex flex-col items-center text-center space-y-3">
-              <div className="relative w-36 h-36 rounded-3xl overflow-hidden border-2 border-emerald-700/30 shadow-lg">
-                <img 
-                  src={chef.photo} 
-                  alt={chef.name} 
+              <div className="relative w-36 h-36 rounded-3xl overflow-hidden border-2 border-stone-200 shadow-lg">
+                <img
+                  src={chef.photo}
+                  alt={chef.name}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute bottom-2 right-2 bg-emerald-800 text-white p-1 rounded-full shadow">
-                  <CheckCircle2 className="w-4 h-4 text-amber-400" />
+                <div className="absolute bottom-2 right-2 bg-stone-900 text-white p-1 rounded-full shadow">
+                  <CheckCircle2 className="w-4 h-4" />
                 </div>
               </div>
 
               <div>
-                <h3 className="text-xl font-bold text-stone-900">{chef.name}</h3>
-                <p className="text-emerald-800 text-xs font-bold">{chef.title}</p>
+                <h3 className="font-serif text-xl font-semibold text-stone-900">{chef.name}</h3>
+                <p className="text-stone-500 text-xs font-semibold">{chef.title}</p>
               </div>
 
-              <div className="flex items-center gap-1 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20 text-amber-900 text-xs font-bold">
+              <div className="flex items-center gap-1 bg-stone-100 px-3 py-1 border border-stone-200 text-stone-700 text-xs font-semibold">
                 <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
                 <span>{chef.rating} ({chef.reviewCount} households served)</span>
               </div>
@@ -111,8 +106,8 @@ export const CookSchedule: React.FC<CookScheduleProps> = ({
             <div className="md:col-span-8 space-y-4 border-t md:border-t-0 md:border-l border-stone-100 pt-6 md:pt-0 md:pl-8">
               
               {/* Trust Badge */}
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-900 text-xs font-bold border border-emerald-200/80">
-                <ShieldCheck className="w-4 h-4 text-emerald-700" />
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-stone-100 text-stone-800 text-xs font-semibold border border-stone-200">
+                <ShieldCheck className="w-4 h-4 text-stone-700" />
                 <span>Same Certified Cook Every Visit • 100% Background Verified</span>
               </div>
 
@@ -126,7 +121,7 @@ export const CookSchedule: React.FC<CookScheduleProps> = ({
                 <div className="flex flex-wrap gap-2">
                   {chef.specializations.map(spec => (
                     <span key={spec} className="px-3 py-1 rounded-xl bg-stone-100 border border-stone-200 text-stone-800 text-xs font-bold flex items-center gap-1.5">
-                      <Award className="w-3.5 h-3.5 text-amber-600" />
+                      <Award className="w-3.5 h-3.5 text-stone-600" />
                       {spec}
                     </span>
                   ))}
@@ -144,11 +139,11 @@ export const CookSchedule: React.FC<CookScheduleProps> = ({
         {/* Weekly Calendar Visit Picker */}
         <div className="bg-white rounded-[32px] border border-stone-200 p-6 sm:p-8 shadow-sm space-y-6">
           <div>
-            <span className="text-emerald-800 font-bold uppercase tracking-widest text-xs flex items-center gap-1.5 mb-1">
-              <Calendar className="w-3.5 h-3.5 text-amber-600" />
+            <span className="text-stone-500 font-semibold uppercase tracking-widest text-xs flex items-center gap-1.5 mb-1">
+              <Calendar className="w-3.5 h-3.5 text-stone-400" />
               Visit Frequency & Schedule
             </span>
-            <h3 className="text-2xl font-bold text-stone-900 tracking-tight">
+            <h3 className="font-serif text-2xl font-semibold text-stone-900 tracking-tight">
               Set Your Weekly Kitchen Days
             </h3>
             <p className="text-stone-500 text-xs sm:text-sm">
@@ -169,14 +164,14 @@ export const CookSchedule: React.FC<CookScheduleProps> = ({
                     key={day}
                     type="button"
                     onClick={() => handleDayToggle(day)}
-                    className={`py-3 px-2 rounded-2xl text-xs font-bold border transition-all text-center flex flex-col items-center justify-center gap-1 ${
+                    className={`py-3 px-2 rounded-2xl text-xs font-bold border transition-colors duration-200 text-center flex flex-col items-center justify-center gap-1 cursor-pointer ${
                       isSelected
-                        ? 'bg-emerald-800 text-white border-emerald-800 shadow-md'
-                        : 'bg-stone-50 text-stone-700 border-stone-200 hover:bg-stone-100'
+                        ? 'bg-stone-900 text-white border-stone-900'
+                        : 'bg-stone-50 text-stone-700 border-stone-200 hover:border-stone-400'
                     }`}
                   >
                     <span>{day.substring(0, 3)}</span>
-                    {isSelected && <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />}
+                    {isSelected && <CheckCircle2 className="w-3.5 h-3.5 text-white" />}
                   </button>
                 );
               })}
@@ -204,7 +199,7 @@ export const CookSchedule: React.FC<CookScheduleProps> = ({
                     }`}
                   >
                     <span>{slot}</span>
-                    {isSelected && <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />}
+                    {isSelected && <CheckCircle2 className="w-4 h-4 text-white shrink-0" />}
                   </button>
                 );
               })}
@@ -217,7 +212,7 @@ export const CookSchedule: React.FC<CookScheduleProps> = ({
           <button
             type="button"
             onClick={onBack}
-            className="px-6 py-3.5 border border-stone-200 rounded-2xl text-stone-700 text-xs font-bold uppercase tracking-wider flex items-center gap-2 hover:bg-stone-100"
+            className="px-6 py-3.5 border border-stone-300 text-stone-700 text-xs font-semibold uppercase tracking-wider flex items-center gap-2 hover:border-stone-900 hover:text-stone-900 transition-colors duration-200 cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Tiers
@@ -225,7 +220,7 @@ export const CookSchedule: React.FC<CookScheduleProps> = ({
           <button
             type="button"
             onClick={onConfirm}
-            className="px-10 py-4 bg-amber-500 hover:bg-amber-400 text-stone-950 rounded-2xl font-black text-sm shadow-xl shadow-amber-500/20 transition-all flex items-center gap-2 transform hover:-translate-y-0.5"
+            className="px-10 py-4 bg-stone-900 hover:bg-stone-800 text-white font-medium text-sm uppercase tracking-[0.1em] transition-colors duration-200 flex items-center gap-2 cursor-pointer"
           >
             Confirm & Start Subscription
             <ArrowRight className="w-4 h-4" />

@@ -85,6 +85,33 @@ export const GOALS: GoalOption[] = [
   }
 ];
 
+export const CUISINE_STYLES = [
+  {
+    value: 'North & South Indian Fusion',
+    name: 'North & South Indian Fusion',
+    description: 'Rotis, sabzis, sambar and dosa rotated across the week — the broadest palate coverage for a household with mixed preferences.',
+    popular: true,
+  },
+  {
+    value: 'Classic South Indian (Sambar, Poriyal, Millet Dosa)',
+    name: 'Classic South Indian',
+    description: 'Sambar, poriyal, and millet-based dosas and idlis — lighter, fermented, and gut-friendly by design.',
+    popular: false,
+  },
+  {
+    value: 'Traditional North Indian (Sabzi, Dal, Phulkas)',
+    name: 'Traditional North Indian',
+    description: 'Home-style sabzi, dal, and multigrain phulkas — familiar comfort food, rebuilt with clinical macros.',
+    popular: false,
+  },
+  {
+    value: 'Pan-Asian & Continental Healthy Fusion',
+    name: 'Pan-Asian & Continental',
+    description: 'Grilled proteins, quinoa bowls, and light stir-fries — for households eating outside the classic thali format.',
+    popular: false,
+  },
+];
+
 export const SUBSCRIPTION_PLANS: SubscriptionPlan[] = [
   {
     id: 'starter',

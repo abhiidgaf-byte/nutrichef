@@ -35,7 +35,7 @@ const plans = SUBSCRIPTION_PLANS.map(plan => ({
 
 export const Pricing: React.FC<PricingProps> = ({ onStartFlow }) => {
   return (
-    <section id="subscriptions" className="bg-white py-28 px-6 relative overflow-hidden">
+    <section id="subscriptions" className="bg-[#FAF8F5] py-36 px-6 relative overflow-hidden">
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-emerald-100/30 rounded-full blur-[120px] -translate-y-1/2 pointer-events-none" />
       
       <div className="max-w-7xl mx-auto relative z-10">
@@ -52,10 +52,10 @@ export const Pricing: React.FC<PricingProps> = ({ onStartFlow }) => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-7xl font-bold text-stone-900 tracking-tighter leading-[0.9] mb-6"
+            className="font-serif text-4xl md:text-7xl font-semibold text-stone-900 tracking-tight leading-[1] mb-6"
           >
             Precision <br />
-            <span className="text-stone-400">Nutrition Pathways.</span>
+            <span className="text-stone-400 italic">Nutrition Pathways.</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0 }}
@@ -79,7 +79,7 @@ export const Pricing: React.FC<PricingProps> = ({ onStartFlow }) => {
               className={`relative p-10 rounded-[40px] flex flex-col justify-between transition-all duration-300 hover:shadow-2xl ${
                 plan.isPremium 
                   ? 'bg-emerald-50/90 text-stone-900 border-2 border-emerald-600 shadow-xl hover:border-emerald-700' 
-                  : 'bg-[#FAF8F5] text-stone-900 border border-stone-200 shadow-md hover:border-emerald-300'
+                  : 'bg-white text-stone-900 border border-stone-200 shadow-md hover:border-emerald-300'
               }`}
             >
               {plan.isPremium && (
@@ -119,18 +119,12 @@ export const Pricing: React.FC<PricingProps> = ({ onStartFlow }) => {
                 </div>
               </div>
 
-              <motion.button 
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+              <button
                 onClick={() => onStartFlow?.(plan.id)}
-                className={`w-full py-4 rounded-2xl font-black text-sm uppercase tracking-wider transition-all shadow-md ${
-                  plan.isPremium 
-                    ? 'bg-emerald-800 text-white hover:bg-emerald-900' 
-                    : 'bg-stone-900 text-white hover:bg-stone-800'
-                }`}
+                className="w-full py-4 bg-stone-900 hover:bg-stone-800 text-white font-medium text-sm uppercase tracking-[0.12em] transition-colors duration-200 cursor-pointer"
               >
                 {plan.buttonText}
-              </motion.button>
+              </button>
             </motion.div>
           ))}
         </div>
