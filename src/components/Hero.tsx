@@ -148,7 +148,7 @@ export const Hero: React.FC<HeroProps> = ({ onStartFlow }) => {
                 <div className="w-6 h-6 rounded-xl bg-emerald-500/30 flex items-center justify-center text-emerald-300">
                   <Award className="w-3.5 h-3.5" />
                 </div>
-                <span>✓ Approved by Nutrition Experts</span>
+                <span>✓ Reviewed by Registered Dietitians</span>
               </motion.div>
 
               <motion.div 
