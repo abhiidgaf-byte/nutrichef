@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, ArrowLeft, MapPin, ChevronDown } from 'lucide-react';
 import { FlowStep } from '../types';
+import ncLogo from '../assets/images/nc-logo.png';
 
 interface NavbarProps {
   currentStep?: FlowStep;
@@ -64,9 +65,11 @@ export const Navbar: React.FC<NavbarProps> = ({
           onClick={onReturnToLanding}
           className="flex items-center gap-2.5 group cursor-pointer"
         >
-          <div className="w-9 h-9 bg-emerald-800 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-800/20 group-hover:scale-105 transition-transform duration-300">
-            <span className="text-amber-400 font-bold italic text-lg">N</span>
-          </div>
+          <img
+            src={ncLogo}
+            alt="NutriChef"
+            className="w-9 h-9 rounded-xl object-cover shadow-lg shadow-stone-900/10 group-hover:scale-105 transition-transform duration-300"
+          />
           <div>
             <span className="font-serif text-xl font-semibold tracking-tight text-stone-900 block leading-none">
               NutriChef

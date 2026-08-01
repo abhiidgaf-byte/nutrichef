@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, Instagram, Linkedin, Mail } from 'lucide-react';
+import ncLogo from '../assets/images/nc-logo.png';
 
 interface FinalCTAProps {
   onStartFlow?: () => void;
@@ -65,9 +66,7 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center gap-3 mb-6">
-               <div className="w-10 h-10 bg-emerald-800 rounded-xl flex items-center justify-center shadow-md shadow-emerald-800/20">
-                  <span className="text-amber-400 font-bold italic text-xl">N</span>
-               </div>
+               <img src={ncLogo} alt="NutriChef" className="w-10 h-10 rounded-xl object-cover shadow-md shadow-stone-900/10" />
                <span className="font-serif text-2xl font-semibold text-stone-900 tracking-tight">NutriChef</span>
             </div>
             <p className="text-stone-500 text-lg font-medium leading-relaxed max-w-xs">
