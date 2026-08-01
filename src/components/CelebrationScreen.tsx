@@ -15,7 +15,7 @@ export const CelebrationScreen: React.FC<CelebrationScreenProps> = ({
   schedule,
   onGoToDashboard
 }) => {
-  const chef = CHEFS[0]; // Chef Arjun
+  const chef = CHEFS.find(c => c.neighborhoods.includes(userProfile.neighborhood)) ?? CHEFS[0];
   const calories = userProfile.goals.includes('Fat Loss & Body Recomp') ? 1850 : 2200;
   const protein = userProfile.goals.includes('Lean Muscle & Strength') ? '160g' : '135g';
   const primaryGoal = userProfile.goals[0] || 'Condition Management';

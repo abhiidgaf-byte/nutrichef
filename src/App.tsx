@@ -235,6 +235,7 @@ export default function App() {
             <CustomerDashboard
               userProfile={userProfile}
               schedule={schedule}
+              selectedPlanId={selectedPlanId}
               onRestartFlow={handleReturnToLanding}
             />
           </motion.div>

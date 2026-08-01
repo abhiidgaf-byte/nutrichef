@@ -22,17 +22,19 @@ import {
   Heart
 } from 'lucide-react';
 import { UserProfile, VisitSchedule } from '../types';
-import { CHEFS, SAMPLE_WEEKLY_MEALS } from '../data/mockData';
+import { CHEFS, SAMPLE_WEEKLY_MEALS, SUBSCRIPTION_PLANS } from '../data/mockData';
 
 interface CustomerDashboardProps {
   userProfile: UserProfile;
   schedule: VisitSchedule;
+  selectedPlanId?: string;
   onRestartFlow: () => void;
 }
 
 export const CustomerDashboard: React.FC<CustomerDashboardProps> = ({
   userProfile,
   schedule,
+  selectedPlanId,
   onRestartFlow
 }) => {
   const [activeTab, setActiveTab] = useState<'home' | 'plan' | 'schedule' | 'profile'>('home');
@@ -40,7 +42,8 @@ export const CustomerDashboard: React.FC<CustomerDashboardProps> = ({
   const [selectedStars, setSelectedStars] = useState<number>(5);
   const [ratedEmoji, setRatedEmoji] = useState<string>('😋 Delicious');
 
-  const chef = CHEFS[0]; // Chef Arjun
+  const activePlan = SUBSCRIPTION_PLANS.find(p => p.id === selectedPlanId) ?? SUBSCRIPTION_PLANS[1];
+  const chef = CHEFS.find(c => c.neighborhoods.includes(userProfile.neighborhood)) ?? CHEFS[0];
   const calories = userProfile.goals.includes('Fat Loss & Body Recomp') ? 1850 : 2200;
   const protein = userProfile.goals.includes('Lean Muscle & Strength') ? '160g' : '135g';
 
@@ -299,7 +302,7 @@ export const CustomerDashboard: React.FC<CustomerDashboardProps> = ({
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="text-xl font-bold text-stone-900">Your Subscription & Cook Details</h3>
-                  <p className="text-xs text-stone-500">Health-Condition Plan (₹6,500/mo)</p>
+                  <p className="text-xs text-stone-500">{activePlan.name} ({activePlan.priceDisplay}/mo)</p>
                 </div>
                 <span className="text-xs font-black uppercase tracking-wider text-emerald-800 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200">
                   Active Subscription

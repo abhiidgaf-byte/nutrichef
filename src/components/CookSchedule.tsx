@@ -39,8 +39,8 @@ export const CookSchedule: React.FC<CookScheduleProps> = ({
   onConfirm,
   onBack
 }) => {
-  // Select matched chef based on neighborhood or default
-  const chef = CHEFS[0]; // Chef Arjun Sharma
+  // Match chef by the customer's selected neighborhood, falling back to our default chef
+  const chef = CHEFS.find(c => c.neighborhoods.includes(userProfile.neighborhood)) ?? CHEFS[0];
 
   const handleDayToggle = (day: string) => {
     setSchedule(prev => {

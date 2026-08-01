@@ -2,45 +2,36 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Check, Activity, Stethoscope, ChefHat } from 'lucide-react';
 import { FeatureTooltip } from './FeatureTooltip';
+import { SUBSCRIPTION_PLANS } from '../data/mockData';
 
 interface PricingProps {
   onStartFlow?: (planId?: string) => void;
 }
 
-const plans = [
-  {
-    id: "starter",
-    name: "Fitness Care Plan",
-    price: "9,999",
-    description: "Designed for fitness enthusiasts & active individuals needing daily fresh customized meals.",
-    features: [
-      "2 Cook Visits / Day (6 Days / Week)",
-      "Fresh Home-Cooked Meals Daily",
-      "2 Monthly Health Check-ins with RD",
-      "Dedicated Clinical Nutritionist (RD)",
-      "Same Certified Chef Every Visit"
-    ],
+// Presentational-only metadata (icon, CTA copy, premium styling) keyed by plan id.
+// The actual price/name/features come from SUBSCRIPTION_PLANS — the single source of
+// truth also used by SubscriptionSelect and CustomerDashboard — so they can never drift apart.
+const PLAN_PRESENTATION: Record<string, { buttonText: string; isPremium: boolean; icon: React.ReactNode }> = {
+  starter: {
     buttonText: "Choose Fitness Care Plan",
     isPremium: false,
     icon: <ChefHat className="w-8 h-8" />
   },
-  {
-    id: "health_condition",
-    name: "Health Condition Care",
-    price: "15,999",
-    description: "Our signature plan: 2 cook visits per day for 7 days a week with 4 monthly health check-ins.",
-    features: [
-      "2 Cook Visits / Day (7 Days / Week)",
-      "Fresh Home-Cooked Meals Daily",
-      "4 Monthly Health Check-ins with RD",
-      "Dedicated Clinical Nutritionist (RD)",
-      "Same Certified Chef Every Visit"
-    ],
+  health_condition: {
     buttonText: "Choose Health Condition Plan",
     isPremium: true,
     icon: <Stethoscope className="w-8 h-8" />
   }
-];
+};
+
+const plans = SUBSCRIPTION_PLANS.map(plan => ({
+  id: plan.id,
+  name: plan.name,
+  price: plan.price.toLocaleString('en-IN'),
+  description: plan.description,
+  features: plan.features,
+  ...PLAN_PRESENTATION[plan.id]
+}));
 
 export const Pricing: React.FC<PricingProps> = ({ onStartFlow }) => {
   return (
