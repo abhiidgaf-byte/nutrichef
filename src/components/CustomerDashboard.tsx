@@ -42,6 +42,29 @@ export const CustomerDashboard: React.FC<CustomerDashboardProps> = ({
   const calories = userProfile.goals.includes('Fat Loss & Body Recomp') ? 1850 : 2200;
   const protein = userProfile.goals.includes('Lean Muscle & Strength') ? '160g' : '135g';
 
+  // Macro targets derived from the calorie/protein targets above, so the numbers
+  // stay internally consistent (protein*4 + fat*9 + carbs*4 = total calories).
+  const targetProteinG = parseInt(protein, 10);
+  const targetFatG = Math.round((calories * 0.3) / 9);
+  const targetCarbsG = Math.round((calories - targetProteinG * 4 - targetFatG * 9) / 4);
+
+  // Illustrative "so far today" progress — same prototype convention as the streak card above.
+  const dayProgress = 0.47;
+  const consumedCalories = Math.round(calories * dayProgress);
+  const remainingCalories = calories - consumedCalories;
+  const consumedProteinG = Math.round(targetProteinG * 0.55);
+  const consumedFatG = Math.round(targetFatG * 0.58);
+  const consumedCarbsG = Math.round(targetCarbsG * 0.42);
+
+  const RING_RADIUS = 52;
+  const RING_CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS;
+
+  const macros = [
+    { label: 'Protein', current: consumedProteinG, target: targetProteinG, color: '#c2542f' },
+    { label: 'Fat', current: consumedFatG, target: targetFatG, color: '#a6853a' },
+    { label: 'Carbs', current: consumedCarbsG, target: targetCarbsG, color: '#0f5c3f' },
+  ];
+
   return (
     <div className="min-h-screen bg-[#FAF8F5] pb-28 pt-20">
 
@@ -117,31 +140,72 @@ export const CustomerDashboard: React.FC<CustomerDashboardProps> = ({
               </div>
             </div>
 
-            {/* Consistency / Progress Tracker Card */}
-            <div className="bg-white rounded-[28px] border border-stone-200 p-6 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-6">
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 bg-stone-100 rounded-2xl border border-stone-200 flex items-center justify-center shrink-0">
-                  <Flame className="w-6 h-6 text-stone-700" />
-                </div>
+            {/* Macro Tracker Card */}
+            <div className="bg-white rounded-[28px] border border-stone-200 p-6 sm:p-8 shadow-sm">
+              <div className="flex items-center justify-between mb-6">
                 <div>
-                  <span className="text-[10px] font-black uppercase tracking-widest text-stone-600 bg-stone-100 px-2 py-0.5 border border-stone-200">
-                    Nutrition Streak
-                  </span>
-                  <h4 className="font-serif text-xl font-semibold text-stone-900 mt-1">14 Days Clean Compliance</h4>
-                  <p className="text-xs text-stone-500 font-medium">98% biomarker goal adherence this month</p>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-stone-500">Today's Food Log</span>
+                  <h4 className="font-serif text-lg font-semibold text-stone-900 mt-0.5">Macro Tracker</h4>
+                </div>
+                <span className="text-xs font-semibold text-stone-400">Friday, Aug 1</span>
+              </div>
+
+              <div className="flex items-center justify-center gap-5 sm:gap-10 mb-8">
+                <div className="text-center shrink-0">
+                  <p className="text-xl sm:text-2xl font-black text-stone-900">{remainingCalories}</p>
+                  <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-stone-400">Remaining</p>
+                </div>
+
+                <div className="relative w-32 h-32 sm:w-36 sm:h-36 shrink-0">
+                  <svg viewBox="0 0 120 120" className="w-full h-full -rotate-90">
+                    <circle cx="60" cy="60" r={RING_RADIUS} stroke="#e4e2dc" strokeWidth="10" fill="none" />
+                    <circle
+                      cx="60" cy="60" r={RING_RADIUS}
+                      stroke="#0f5c3f" strokeWidth="10" fill="none"
+                      strokeLinecap="round"
+                      strokeDasharray={RING_CIRCUMFERENCE}
+                      strokeDashoffset={RING_CIRCUMFERENCE * (1 - dayProgress)}
+                    />
+                  </svg>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center px-2 text-center">
+                    <span className="text-2xl sm:text-3xl font-black text-stone-900">{consumedCalories}</span>
+                    <span className="text-[9px] font-bold uppercase tracking-wide text-stone-400 leading-tight mt-0.5">Calories<br />Consumed</span>
+                  </div>
+                </div>
+
+                <div className="text-center shrink-0">
+                  <p className="text-xl sm:text-2xl font-black text-stone-900">{calories}</p>
+                  <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-stone-400">Target</p>
                 </div>
               </div>
 
-              {/* Progress Meters */}
-              <div className="flex gap-4 w-full sm:w-auto text-center border-t sm:border-t-0 sm:border-l border-stone-100 pt-4 sm:pt-0 sm:pl-6">
-                <div>
-                  <p className="text-[10px] font-bold text-stone-400 uppercase">Target Cal</p>
-                  <p className="text-lg font-black text-stone-900">{calories}</p>
-                </div>
-                <div>
-                  <p className="text-[10px] font-bold text-stone-400 uppercase">Target Protein</p>
-                  <p className="text-lg font-black text-stone-900">{protein}</p>
-                </div>
+              <div className="grid grid-cols-3 gap-4 sm:gap-6">
+                {macros.map(m => (
+                  <div key={m.label}>
+                    <p className="text-xs font-semibold text-stone-600 mb-1.5">{m.label}</p>
+                    <div className="h-1.5 bg-stone-200 rounded-full overflow-hidden mb-1.5">
+                      <div
+                        className="h-full rounded-full"
+                        style={{ width: `${Math.min(100, (m.current / m.target) * 100)}%`, backgroundColor: m.color }}
+                      />
+                    </div>
+                    <p className="text-xs font-bold text-stone-900">{m.current} / {m.target}g</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Consistency / Progress Tracker Card */}
+            <div className="bg-white rounded-[28px] border border-stone-200 p-6 shadow-sm flex items-center gap-4">
+              <div className="w-14 h-14 bg-stone-100 rounded-2xl border border-stone-200 flex items-center justify-center shrink-0">
+                <Flame className="w-6 h-6 text-stone-700" />
+              </div>
+              <div>
+                <span className="text-[10px] font-black uppercase tracking-widest text-stone-600 bg-stone-100 px-2 py-0.5 border border-stone-200">
+                  Nutrition Streak
+                </span>
+                <h4 className="font-serif text-xl font-semibold text-stone-900 mt-1">14 Days Clean Compliance</h4>
+                <p className="text-xs text-stone-500 font-medium">98% biomarker goal adherence this month</p>
               </div>
             </div>
 
