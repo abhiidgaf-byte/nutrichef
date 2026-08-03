@@ -26,7 +26,7 @@ const INITIAL_PROFILE: UserProfile = {
   healthConditions: ['Diabetes Type 2 / Pre-Diabetic'],
   goals: ['Fat Loss & Body Recomp', 'Lean Muscle & Strength'],
   dietType: 'Non-Veg',
-  allergies: ['Peanut Allergy'],
+  allergies: ['None'],
   cuisinePreference: 'South & North Indian Fusion',
   spiceLevel: 'Medium'
 };

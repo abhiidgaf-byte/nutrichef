@@ -39,6 +39,8 @@ const GOAL_ICONS: Record<string, React.ComponentType<{ className?: string }>> = 
   Zap,
 };
 
+const COMMON_ALLERGENS = ['Peanuts', 'Tree Nuts', 'Dairy', 'Gluten', 'Shellfish', 'Soy', 'Eggs', 'None'];
+
 export const IntakeForm: React.FC<IntakeFormProps> = ({
   userProfile,
   setUserProfile,
@@ -57,6 +59,21 @@ export const IntakeForm: React.FC<IntakeFormProps> = ({
   };
 
   const totalSteps = 4;
+
+  const handleAllergyToggle = (allergen: string) => {
+    if (allergen === 'None') {
+      setUserProfile(prev => ({ ...prev, allergies: ['None'] }));
+      return;
+    }
+    setUserProfile(prev => {
+      const current = prev.allergies.filter(a => a !== 'None');
+      if (current.includes(allergen)) {
+        const next = current.filter(a => a !== allergen);
+        return { ...prev, allergies: next.length ? next : ['None'] };
+      }
+      return { ...prev, allergies: [...current, allergen] };
+    });
+  };
 
   const handleConditionToggle = (conditionName: string) => {
     if (conditionName.includes('None')) {
@@ -538,6 +555,35 @@ export const IntakeForm: React.FC<IntakeFormProps> = ({
                               ))}
                             </span>
                             {spice === 'Authentic Indian' ? 'Authentic' : spice}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Allergies — a real safety field, not just a preference: the chef is cooking
+                      in the customer's kitchen, so this has to be captured before the happy path. */}
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2 flex items-center gap-1.5">
+                      <ShieldAlert className="w-3.5 h-3.5 text-stone-500" />
+                      Allergies & Ingredients to Avoid
+                    </label>
+                    <p className="text-[11px] text-stone-500 mb-2">Select all that apply — your chef will be briefed before the first visit.</p>
+                    <div className="flex flex-wrap gap-2">
+                      {COMMON_ALLERGENS.map(allergen => {
+                        const isSelected = userProfile.allergies.includes(allergen);
+                        return (
+                          <button
+                            key={allergen}
+                            type="button"
+                            onClick={() => handleAllergyToggle(allergen)}
+                            className={`px-3 py-2 border text-xs font-semibold transition-colors duration-200 cursor-pointer ${
+                              isSelected
+                                ? 'bg-stone-900 text-white border-stone-900'
+                                : 'bg-stone-50 text-stone-700 border-stone-200 hover:border-stone-400'
+                            }`}
+                          >
+                            {allergen}
                           </button>
                         );
                       })}

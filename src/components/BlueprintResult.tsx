@@ -2,10 +2,11 @@ import React from 'react';
 import { motion } from 'motion/react';
 import {
   ArrowRight,
-  CheckCircle2
+  CheckCircle2,
+  ShieldAlert
 } from 'lucide-react';
 import { UserProfile } from '../types';
-import { SAMPLE_WEEKLY_MEALS } from '../data/mockData';
+import { SAMPLE_WEEKLY_MEALS, CHEFS } from '../data/mockData';
 
 interface BlueprintResultProps {
   userProfile: UserProfile;
@@ -20,6 +21,9 @@ export const BlueprintResult: React.FC<BlueprintResultProps> = ({
   const targetCalories = userProfile.goals.includes('Fat Loss & Body Recomp') ? 1850 : 2200;
   const targetProtein = userProfile.goals.includes('Lean Muscle & Strength') ? '155g' : '135g';
   const primaryCondition = userProfile.healthConditions[0] || 'General Fitness';
+  const realAllergies = userProfile.allergies.filter(a => a !== 'None');
+  const chef = CHEFS.find(c => c.neighborhoods.includes(userProfile.neighborhood)) ?? CHEFS[0];
+  const chefFirstNameFallback = chef.name.split(' ')[1];
 
   const blueprintId = `KRM-${(userProfile.neighborhood || 'Koramangala').length}${targetCalories}`.slice(0, 8).toUpperCase();
   const generatedOn = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
@@ -66,6 +70,25 @@ export const BlueprintResult: React.FC<BlueprintResultProps> = ({
             <span className="block text-[#4b5259]">Low Glycemic Load Protocol · reviewed {generatedOn}.</span>
           </p>
         </motion.div>
+
+        {/* Allergy Alert — only renders when the customer actually flagged something,
+            so it never falsely implies a risk that isn't there. */}
+        {realAllergies.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.08 }}
+            className="flex items-center gap-3 border border-[#e4b8a3] bg-[#fdf3ee] rounded-[10px] px-4 sm:px-5 py-3.5"
+          >
+            <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center shrink-0">
+              <ShieldAlert className="w-[18px] h-[18px] text-[#b5502e]" strokeWidth={2} />
+            </div>
+            <p className="text-[13.5px] leading-snug">
+              <strong className="font-semibold text-[#14171a]">Allergy Alert on File: {realAllergies.join(', ')}.</strong>
+              <span className="block text-[#4b5259]">Chef {chefFirstNameFallback} has been briefed — every dish this week is prepared without these ingredients.</span>
+            </p>
+          </motion.div>
+        )}
 
         {/* Metrics Grid */}
         <motion.div
