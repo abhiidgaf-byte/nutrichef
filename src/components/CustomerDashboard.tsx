@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion } from 'motion/react';
+import React, { useState, useEffect } from 'react';
+import { motion, useMotionValue, useTransform, animate } from 'motion/react';
 import {
   Home,
   Calendar,
@@ -25,6 +25,37 @@ interface CustomerDashboardProps {
 }
 
 const MEAL_TAGS = ['Delicious', 'Perfect Spice', 'Great Portion'];
+
+const prefersReducedMotion = () =>
+  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Counts up from 0 to `value` on mount using Motion's imperative animate() —
+// the numbers are the emotional payoff of the tracker, so they should arrive, not just appear.
+const AnimatedNumber: React.FC<{ value: number; delay?: number }> = ({ value, delay = 0 }) => {
+  const motionVal = useMotionValue(0);
+  const rounded = useTransform(motionVal, latest => Math.round(latest));
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    if (prefersReducedMotion()) {
+      setDisplay(value);
+      return;
+    }
+    const controls = animate(motionVal, value, {
+      duration: 1.1,
+      delay,
+      ease: [0.16, 1, 0.3, 1],
+    });
+    const unsubscribe = rounded.on('change', setDisplay);
+    return () => {
+      controls.stop();
+      unsubscribe();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
+
+  return <>{display}</>;
+};
 
 export const CustomerDashboard: React.FC<CustomerDashboardProps> = ({
   userProfile,
@@ -152,23 +183,29 @@ export const CustomerDashboard: React.FC<CustomerDashboardProps> = ({
 
               <div className="flex items-center justify-center gap-5 sm:gap-10 mb-8">
                 <div className="text-center shrink-0">
-                  <p className="text-xl sm:text-2xl font-black text-stone-900">{remainingCalories}</p>
+                  <p className="text-xl sm:text-2xl font-black text-stone-900">
+                    <AnimatedNumber value={remainingCalories} />
+                  </p>
                   <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-stone-400">Remaining</p>
                 </div>
 
                 <div className="relative w-32 h-32 sm:w-36 sm:h-36 shrink-0">
                   <svg viewBox="0 0 120 120" className="w-full h-full -rotate-90">
                     <circle cx="60" cy="60" r={RING_RADIUS} stroke="#e4e2dc" strokeWidth="10" fill="none" />
-                    <circle
+                    <motion.circle
                       cx="60" cy="60" r={RING_RADIUS}
                       stroke="#0f5c3f" strokeWidth="10" fill="none"
                       strokeLinecap="round"
                       strokeDasharray={RING_CIRCUMFERENCE}
-                      strokeDashoffset={RING_CIRCUMFERENCE * (1 - dayProgress)}
+                      initial={{ strokeDashoffset: prefersReducedMotion() ? RING_CIRCUMFERENCE * (1 - dayProgress) : RING_CIRCUMFERENCE }}
+                      animate={{ strokeDashoffset: RING_CIRCUMFERENCE * (1 - dayProgress) }}
+                      transition={prefersReducedMotion() ? { duration: 0 } : { duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
                     />
                   </svg>
                   <div className="absolute inset-0 flex flex-col items-center justify-center px-2 text-center">
-                    <span className="text-2xl sm:text-3xl font-black text-stone-900">{consumedCalories}</span>
+                    <span className="text-2xl sm:text-3xl font-black text-stone-900">
+                      <AnimatedNumber value={consumedCalories} />
+                    </span>
                     <span className="text-[9px] font-bold uppercase tracking-wide text-stone-400 leading-tight mt-0.5">Calories<br />Consumed</span>
                   </div>
                 </div>
@@ -180,16 +217,21 @@ export const CustomerDashboard: React.FC<CustomerDashboardProps> = ({
               </div>
 
               <div className="grid grid-cols-3 gap-4 sm:gap-6">
-                {macros.map(m => (
+                {macros.map((m, i) => (
                   <div key={m.label}>
                     <p className="text-xs font-semibold text-stone-600 mb-1.5">{m.label}</p>
                     <div className="h-1.5 bg-stone-200 rounded-full overflow-hidden mb-1.5">
-                      <div
+                      <motion.div
                         className="h-full rounded-full"
-                        style={{ width: `${Math.min(100, (m.current / m.target) * 100)}%`, backgroundColor: m.color }}
+                        style={{ backgroundColor: m.color }}
+                        initial={{ width: prefersReducedMotion() ? `${Math.min(100, (m.current / m.target) * 100)}%` : '0%' }}
+                        animate={{ width: `${Math.min(100, (m.current / m.target) * 100)}%` }}
+                        transition={prefersReducedMotion() ? { duration: 0 } : { duration: 0.9, delay: 0.2 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
                       />
                     </div>
-                    <p className="text-xs font-bold text-stone-900">{m.current} / {m.target}g</p>
+                    <p className="text-xs font-bold text-stone-900">
+                      <AnimatedNumber value={m.current} delay={0.2 + i * 0.12} /> / {m.target}g
+                    </p>
                   </div>
                 ))}
               </div>
